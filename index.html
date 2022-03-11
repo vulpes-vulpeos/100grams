@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
+	<title>100grams</title>
+
+<!-- Javascript -->
+<script type="text/javascript">
+
+	var numberOfFields = 6;
+
+	function calculate(){
+		for (var i = 0; i < numberOfFields; ++i) {
+			var price = document.getElementById("pr_" + i).value;
+			var weight = document.getElementById("wt_" + i).value;
+
+			if (price.includes(',')){
+				price = price.replace(/,/g, '.');
+		  }
+		  if (weight.includes(',')){
+				weight = weight.replace(/,/g, '.');
+		  }
+
+			if (price != 0 && weight != 0) {
+				var result = (price*100)/weight;
+				result = result.toFixed(2);
+				document.getElementById("pw_" + i).value = result;
+			}
+		}
+	}
+
+	function numberCheck(id){
+		var number = Number(document.getElementById(id).value);
+		if (number <= 0){
+			document.getElementById(id).value = "0";	
+		}
+
+		calculate();
+	}
+
+	function reset(){
+		for (var i = 0; i < numberOfFields; ++i) {
+			document.getElementById("pr_" + i).value = "0";
+			document.getElementById("wt_" + i).value = "0";
+			document.getElementById("pw_" + i).value = "0";
+		}
+	}
+
+</script>
+
+<!-- CSS -->
+<style type="text/css">
+	body { 
+    margin: 0;
+	}
+
+	.header{
+		background:#1abc9c;
+		font-family:arial;
+		font-size: 17px;
+		color:white;
+		padding: 10px;
+	}
+
+	.table{
+		font-family: arial;
+	}
+
+	.input{
+		width: 100px;
+		font-size: 17px;
+	}
+	.inputResult{
+		width: 100px;
+		background: white;
+		color: black;
+		font-size: 17px;
+		border-radius: 5px;
+    border: 1px;
+    box-shadow: none;
+    outline: 0;
+	}
+
+	input:disabled, textarea:disabled, input:disabled::placeholder, textarea:disabled::placeholder {
+  -webkit-text-fill-color: black; /* 1. sets text fill to current `color` for safari */
+  opacity: 1;                     /* 2. correct opacity on iOS */
+	}
+
+  .footer{
+  	text-align: right;
+  }
+
+  .button{
+  	font-size: 17px;
+  	color: white;
+  	padding: 10px;
+  	background-color: #1abc9c;
+    border-radius: 5px;
+    border: 1px;
+    box-shadow: none;
+    outline: 0;
+    margin-right: 8px;
+  }
+</style>
+
+</head>
+
+<!-- HTML -->
+<body>
+
+<!-- Header -->
+<div class="header">
+	<table>
+		<tr >
+			<td></td>
+			<td valign="middle">100grams</td>
+		</tr>
+	</table>
+</div>
+
+<!-- Table -->
+<p></p>
+	<table class="table" align="center">
+  	<tr>
+    	<th>Price</th>
+    	<th>Weight (g.)</th>
+    	<th>Price for 100 g.</th>
+  	</tr>
+  	<tr>
+    	<td><input class="input" type="text" inputmode="decimal" id="pr_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="input" type="text" inputmode="decimal" id="wt_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="inputResult" type="number" id="pw_0" value=0 disabled></td>
+  	</tr>
+  	<tr>
+    	<td><input class="input" type="text" inputmode="decimal" id="pr_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="input" type="text" inputmode="decimal" id="wt_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="inputResult" type="number" id="pw_1" value=0 disabled></td>
+  	</tr>
+  	<tr>
+    	<td><input class="input" type="text" inputmode="decimal" id="pr_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="input" type="text" inputmode="decimal" id="wt_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="inputResult" type="number" id="pw_2" value=0 disabled></td>
+  	</tr>
+  	<tr>
+    	<td><input class="input" type="text" inputmode="decimal" id="pr_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="input" type="text" inputmode="decimal" id="wt_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="inputResult" type="number" id="pw_3" value=0 disabled></td>
+  	</tr>
+  	<tr>
+    	<td><input class="input" type="text" inputmode="decimal" id="pr_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="input" type="text" inputmode="decimal" id="wt_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="inputResult" type="number" id="pw_4" value=0 disabled></td>
+  	</tr>
+  	<tr>
+    	<td><input class="input" type="text" inputmode="decimal" id="pr_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="input" type="text" inputmode="decimal" id="wt_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+    	<td><input class="inputResult" type="number" id="pw_5" value=0 disabled></td>
+  	</tr>
+	</table>
+<p></p>
+
+<!-- Footer -->
+<div class="footer">
+	<footer>
+		<button type="button" class="button" onclick="reset()">Reset</button>
+	</footer>
+</div>
+
+</body>
+</html>
