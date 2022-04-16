@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
 	<title>100grams</title>
-	
+
 	<!-- Icon for iPhone -->
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
@@ -12,6 +12,39 @@
 <script type="text/javascript">
 
 	var numberOfFields = 6;
+	var mode = 100;
+
+	const text = ["100grams","Price","Weight(g.)","Price for 100 g.","Reset","pcs","Pieces","Price for piece"];
+	const ruText = ["100грамм","Цена","Вес(г.)","Цена за 100 г.","Сброс","шт.","Штук в уп.","Цена за штуку"];
+
+	function setLocale(){
+		var locale = navigator.language;
+		locale = locale.substring(0,2);
+		if (locale.includes("ru")){
+			for (var i = 0; i < text.length; ++i){
+				text[i] = ruText[i];
+			};
+		};
+
+		document.getElementById("title").innerHTML=text[0];
+		document.getElementById("pr_h").innerHTML=text[1];
+		document.getElementById("un_h").innerHTML=text[2];
+		document.getElementById("pfun_h").innerHTML=text[3];
+		document.getElementById("resetButton").innerHTML=text[4];
+		document.getElementById("modeText").innerHTML=text[5];
+	}
+
+	function changeMode(checkboxState){
+		if (checkboxState.checked) {
+    	mode = 1;
+    	document.getElementById("un_h").innerHTML=text[6];
+    	document.getElementById("pfun_h").innerHTML=text[7];
+  	} else {
+    	mode = 100;
+    	document.getElementById("un_h").innerHTML=text[2];
+    	document.getElementById("pfun_h").innerHTML=text[3];
+  	}
+	}
 
 	function calculate(){
 		for (var i = 0; i < numberOfFields; ++i) {
@@ -26,9 +59,9 @@
 		  }
 
 			if (price != 0 && weight != 0) {
-				var result = (price*100)/weight;
+				var result = (price*mode)/weight;
 				result = result.toFixed(2);
-				document.getElementById("pw_" + i).value = result;
+				document.getElementById("pw_" + i).innerHTML=result;
 			}
 		}
 	}
@@ -46,7 +79,7 @@
 		for (var i = 0; i < numberOfFields; ++i) {
 			document.getElementById("pr_" + i).value = "0";
 			document.getElementById("wt_" + i).value = "0";
-			document.getElementById("pw_" + i).value = "0";
+			document.getElementById("pw_" + i).innerHTML = "0";
 		}
 	}
 
@@ -56,6 +89,7 @@
 <style type="text/css">
 	body { 
     margin: 0;
+    overscroll-behavior-y: none;
 	}
 
 	.header{
@@ -63,7 +97,9 @@
 		font-family:arial;
 		font-size: 17px;
 		color:white;
-		padding: 10px;
+		padding: 1px;
+		padding-left: 10px;
+		padding-right: 10px;
 	}
 
 	.table{
@@ -110,55 +146,53 @@
 </head>
 
 <!-- HTML -->
-<body>
+<body onload="javascript:setLocale()">
 
 <!-- Header -->
 <div class="header">
-	<table>
-		<tr >
-			<td></td>
-			<td valign="middle">100grams</td>
-		</tr>
-	</table>
+	<p style="text-align=left;"> <label id="title">100grams</label>
+	<span style="float:right;"> <input type="checkbox" class="roundedSwitch" id="modeChanger" onchange="changeMode(this)"><label id="modeText">pcs</label>
+	</span>
+	</p>
 </div>
 
 <!-- Table -->
 <p></p>
 	<table class="table" align="center">
   	<tr>
-    	<th>Price</th>
-    	<th>Weight (g.)</th>
-    	<th>Price for 100 g.</th>
+    	<th id="pr_h">Price</th>
+    	<th id="un_h">Weight (g.)</th>
+    	<th id="pfun_h">Price for 100 g.</th>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="inputResult" type="number" id="pw_0" value=0 disabled></td>
+    	<td><label id="pw_0">0</label></td>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="inputResult" type="number" id="pw_1" value=0 disabled></td>
+    	<td><label id="pw_1">0</label></td>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="inputResult" type="number" id="pw_2" value=0 disabled></td>
+    	<td><label id="pw_2">0</label></td>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="inputResult" type="number" id="pw_3" value=0 disabled></td>
+    	<td><label id="pw_3">0</label></td>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="inputResult" type="number" id="pw_4" value=0 disabled></td>
+    	<td><label id="pw_4">0</label></td>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="inputResult" type="number" id="pw_5" value=0 disabled></td>
+    	<td><label id="pw_5">0</label></td>
   	</tr>
 	</table>
 <p></p>
@@ -166,7 +200,7 @@
 <!-- Footer -->
 <div class="footer">
 	<footer>
-		<button type="button" class="button" onclick="reset()">Reset</button>
+		<button type="button" class="button" id="resetButton" onclick="reset()">Reset</button>
 	</footer>
 </div>
 
