@@ -14,8 +14,8 @@
 	var numberOfFields = 6;
 	var mode = 100;
 
-	const text = ["100grams","Price","Weight(g.)","Price for 100 g.","Reset","pcs","Pieces","Price for piece"];
-	const ruText = ["100грамм","Цена","Вес(г.)","Цена за 100 г.","Сброс","шт.","Штук в уп.","Цена за штуку"];
+	const text = ["100grams","Price","Weight(g.)","Price for 100 g.","Reset","Pieces","Price for piece","g. o-- pcs","g. --o pcs"];
+	const ruText = ["100грамм","Цена","Вес(г.)","Цена за 100 г.","Сброс","шт.","Штук в уп.","Цена за штуку","г. o-- шт.","г. --o шт."];
 
 	function setLocale(){
 		var locale = navigator.language;
@@ -31,19 +31,23 @@
 		document.getElementById("un_h").innerHTML=text[2];
 		document.getElementById("pfun_h").innerHTML=text[3];
 		document.getElementById("resetButton").innerHTML=text[4];
-		document.getElementById("modeText").innerHTML=text[5];
+		document.getElementById("modeChanger").innerHTML=text[7];
 	}
 
-	function changeMode(checkboxState){
-		if (checkboxState.checked) {
+	function changeMode(){
+		if (mode == 100) {
     	mode = 1;
-    	document.getElementById("un_h").innerHTML=text[6];
-    	document.getElementById("pfun_h").innerHTML=text[7];
+    	document.getElementById("modeChanger").innerHTML=text[8];
+    	document.getElementById("un_h").innerHTML=text[5];
+    	document.getElementById("pfun_h").innerHTML=text[6];
   	} else {
     	mode = 100;
+    	document.getElementById("modeChanger").innerHTML=text[7];
     	document.getElementById("un_h").innerHTML=text[2];
     	document.getElementById("pfun_h").innerHTML=text[3];
   	}
+
+  	reset();
 	}
 
 	function calculate(){
@@ -110,6 +114,7 @@
 		width: 100px;
 		font-size: 17px;
 	}
+
 	.inputResult{
 		width: 100px;
 		background: white;
@@ -119,11 +124,6 @@
     border: 1px;
     box-shadow: none;
     outline: 0;
-	}
-
-	input:disabled, textarea:disabled, input:disabled::placeholder, textarea:disabled::placeholder {
-  -webkit-text-fill-color: black; /* 1. sets text fill to current `color` for safari */
-  opacity: 1;                     /* 2. correct opacity on iOS */
 	}
 
   .footer{
@@ -151,7 +151,9 @@
 <!-- Header -->
 <div class="header">
 	<p style="text-align=left;"> <label id="title">100grams</label>
-	<span style="float:right;"> <input type="checkbox" class="roundedSwitch" id="modeChanger" onchange="changeMode(this)"><label id="modeText">pcs</label>
+	<span style="float:right;" id="modeChanger" onclick="changeMode()"> 
+		<!-- <input type="checkbox" class="roundedSwitch" id="modeChanger" onchange="changeMode(this)"><label id="modeText">pcs</label> -->
+		g. o-- pcs
 	</span>
 	</p>
 </div>
@@ -167,32 +169,32 @@
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><label id="pw_0">0</label></td>
+    	<td style="text-align: center;"><label id="pw_0">0</label></td>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><label id="pw_1">0</label></td>
+    	<td style="text-align: center;"><label id="pw_1">0</label></td>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><label id="pw_2">0</label></td>
+    	<td style="text-align: center;"><label id="pw_2">0</label></td>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><label id="pw_3">0</label></td>
+    	<td style="text-align: center;"><label id="pw_3">0</label></td>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><label id="pw_4">0</label></td>
+    	<td style="text-align: center;"><label id="pw_4">0</label></td>
   	</tr>
   	<tr>
     	<td><input class="input" type="text" inputmode="decimal" id="pr_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
     	<td><input class="input" type="text" inputmode="decimal" id="wt_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><label id="pw_5">0</label></td>
+    	<td style="text-align: center;"><label id="pw_5">0</label></td>
   	</tr>
 	</table>
 <p></p>
