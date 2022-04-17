@@ -14,8 +14,8 @@
 	var numberOfFields = 6;
 	var mode = 100;
 
-	const text =   ["100grams","Price","Weight(g.)","Price for 100 g.","Reset","Pieces","Price for piece","g. o-- pcs","g. --o pcs"];
-	const ruText = ["100грамм","Цена", "Вес(г.)","Цена за 100 г.","Сброс","Штук в уп.","Цена за штуку","г. o-- шт.","г. --o шт."];
+	const text = ["100grams","Price","Weight(g.)","Price for 100g.","Reset","Pieces","Price for piece","g. o⎯ pcs","g. ⎯o pcs"];
+	const ruText = ["100грамм","Цена", "Вес(г.)","Цена за 100г.","Сброс","Штук в уп.","Цена за штуку","г. o⎯ шт.","г. ⎯o шт."];
 
 	function setLocale(){
 		var locale = navigator.language;
@@ -97,7 +97,7 @@
 	}
 
 	.header{
-		background:#1abc9c;
+		background:#64C260;
 		font-family:arial;
 		font-size: 17px;
 		color:white;
@@ -108,22 +108,17 @@
 
 	.table{
 		font-family: arial;
+		border-spacing: 10px;
 	}
 
 	.input{
 		width: 100px;
 		font-size: 17px;
-	}
+		border-radius: 0px;
+		border-width: 0px;
+		border-bottom-width: 1px;
+		border-color: #E7E9EB;
 
-	.inputResult{
-		width: 100px;
-		background: white;
-		color: black;
-		font-size: 17px;
-		border-radius: 5px;
-    border: 1px;
-    box-shadow: none;
-    outline: 0;
 	}
 
   .footer{
@@ -134,7 +129,7 @@
   	font-size: 17px;
   	color: white;
   	padding: 10px;
-  	background-color: #1abc9c;
+  	background-color: #64C260;
     border-radius: 5px;
     border: 1px;
     box-shadow: none;
@@ -150,11 +145,8 @@
 
 <!-- Header -->
 <div class="header">
-	<p style="text-align=left;"> <label id="title">100grams</label>
-	<span style="float:right;" id="modeChanger" onclick="changeMode()"> 
-		<!-- <input type="checkbox" class="roundedSwitch" id="modeChanger" onchange="changeMode(this)"><label id="modeText">pcs</label> -->
-		g. o-- pcs
-	</span>
+	<p style="text-align=left;"> <label id="title" style="font-weight:bold;">100grams</label>
+	<span style="float:right;" id="modeChanger" onclick="changeMode()"> g. o⎯ pcs </span>
 	</p>
 </div>
 
