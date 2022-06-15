@@ -16,7 +16,7 @@
 
 	const text = ["100grams", "Price", "Weight(g.)", "Price for 100g.", "Reset", "Pieces", "Price for piece", "100grams", "1piece"];
 	const ruText = ["100грамм", "Цена", "Вес(г.)", "Цена за 100г.", "Сброс", "Штук в уп.", "Цена за штуку", "100грамм", "1штука"];
-	const icons = ["100grams/icons/100grams_off.svg", "100grams/icons/100grams_on.svg", "100grams/icons/1piece_off.svg", "100grams/icons/1piece_on.svg"];
+	const icons = ["/100grams/icons/100grams_off.svg", "/100grams/icons/100grams_on.svg", "/100grams/icons/1piece_off.svg", "/100grams/icons/1piece_on.svg"];
 
 	function setLocale(){
 		var locale = navigator.language;
@@ -232,10 +232,10 @@
 		<table class="tabbar_table" align="center">
 			<tr>
 				<td onclick="changeMode(100)" style="width: 50%;">
-					<img id="mode100icon" src="100grams/icons/100grams_on.svg" alt="100 gramm mode icon" width="20" height="20"></img>
+					<img id="mode100icon" src="/100grams/icons/100grams_on.svg" alt="100 gramm mode icon" width="20" height="20"></img>
 				</td>
 				<td onclick="changeMode(1)">
-					<img id="mode1icon" src="100grams/icons/1piece_off.svg" alt="1 piece mode icon" width="20" height="20"></img>
+					<img id="mode1icon" src="/100grams/icons/1piece_off.svg" alt="1 piece mode icon" width="20" height="20"></img>
 				</td>
 			</tr>
 			<tr>
