@@ -11,12 +11,12 @@
 <!-- Javascript -->
 <script type="text/javascript">
 
-	var numberOfFields = 6;
-	var mode = 100;
+	var g_numberOfInputRows = 6;
+	var g_mode = 100;
 
-	const text = ["100grams","Price","Weight(g.)","Price for 100g.","Reset","Pieces","Price for piece","100grams","1piece"];
-	const ruText = ["100грамм","Цена", "Вес(г.)","Цена за 100г.","Сброс","Штук в уп.","Цена за штуку","100грамм","1штука"];
-	const icons = ["/100grams/icons/100grams_off.svg","/100grams/icons/100grams_on.svg","/100grams/icons/1piece_off.svg","/100grams/icons/1piece_on.svg"];
+	const text = ["100grams", "Price", "Weight(g.)", "Price for 100g.", "Reset", "Pieces", "Price for piece", "100grams", "1piece"];
+	const ruText = ["100грамм", "Цена", "Вес(г.)", "Цена за 100г.", "Сброс", "Штук в уп.", "Цена за штуку", "100грамм", "1штука"];
+	const icons = ["100grams/icons/100grams_off.svg", "100grams/icons/100grams_on.svg", "100grams/icons/1piece_off.svg", "100grams/icons/1piece_on.svg"];
 
 	function setLocale(){
 		var locale = navigator.language;
@@ -32,49 +32,49 @@
 		document.getElementById("un_h").innerHTML=text[2];
 		document.getElementById("pfun_h").innerHTML=text[3];
 		document.getElementById("resetButton").innerHTML=text[4];
-		document.getElementById("mode100_text").innerHTML=text[7];
-		document.getElementById("mode1_text").innerHTML=text[8];
+		document.getElementById("mode100text").innerHTML=text[7];
+		document.getElementById("mode1text").innerHTML=text[8];
 	}
 
 	function changeMode(setMode){
 		if (setMode == 100) {
-			mode = 100;
+			g_mode = 100;
 
-    	document.getElementById("un_h").innerHTML=text[2];
-    	document.getElementById("pfun_h").innerHTML=text[3];
-    	document.getElementById("mode100_icon").src=icons[1];
-    	document.getElementById("mode1_icon").src=icons[2];
-    	document.getElementById("mode100_text").style.color = "#3478F5";
-    	document.getElementById("mode1_text").style.color = "#949494";
-  	} 
-  	else {
-  		mode = 1;
+			document.getElementById("un_h").innerHTML=text[2];
+			document.getElementById("pfun_h").innerHTML=text[3];
+			document.getElementById("mode100icon").src=icons[1];
+			document.getElementById("mode1icon").src=icons[2];
+			document.getElementById("mode100text").style.color = "#3478F5";
+			document.getElementById("mode1text").style.color = "#949494";
+		} 
+		else {
+			g_mode = 1;
 
-    	document.getElementById("un_h").innerHTML=text[5];
-    	document.getElementById("pfun_h").innerHTML=text[6];
-    	document.getElementById("mode100_icon").src=icons[0];
-    	document.getElementById("mode1_icon").src=icons[3];
-    	document.getElementById("mode100_text").style.color = "#949494";
-    	document.getElementById("mode1_text").style.color = "#3478F5";
-  	};
+			document.getElementById("un_h").innerHTML=text[5];
+			document.getElementById("pfun_h").innerHTML=text[6];
+			document.getElementById("mode100icon").src=icons[0];
+			document.getElementById("mode1icon").src=icons[3];
+			document.getElementById("mode100text").style.color = "#949494";
+			document.getElementById("mode1text").style.color = "#3478F5";
+		};
 
-  	reset();
+		reset();
 	}
 
 	function calculate(){
-		for (var i = 0; i < numberOfFields; ++i) {
+		for (var i = 0; i < g_numberOfInputRows; ++i) {
 			var price = document.getElementById("pr_" + i).value;
 			var weight = document.getElementById("wt_" + i).value;
 
 			if (price.includes(',')){
 				price = price.replace(/,/g, '.');
-		  };
-		  if (weight.includes(',')){
+			};
+			if (weight.includes(',')){
 				weight = weight.replace(/,/g, '.');
-		  };
+			};
 
 			if (price != 0 && weight != 0) {
-				var result = (price*mode)/weight;
+				var result = (price*g_mode)/weight;
 				result = result.toFixed(2);
 				document.getElementById("pw_" + i).innerHTML=result;
 			};
@@ -91,7 +91,7 @@
 	}
 
 	function reset(){
-		for (var i = 0; i < numberOfFields; ++i) {
+		for (var i = 0; i < g_numberOfInputRows; ++i) {
 			document.getElementById("pr_" + i).value = "0";
 			document.getElementById("wt_" + i).value = "0";
 			document.getElementById("pw_" + i).innerHTML = "0";
@@ -103,45 +103,48 @@
 <!-- CSS -->
 <style type="text/css">
 	body { 
-    margin: 0;
-    overscroll-behavior-y: none;
+		margin: 0;
+		overscroll-behavior-y: none;
 	}
 
 	.header{
-		background:#64C260;
-		font-family:arial;
-		font-size: 17pt;
-		color:white;
-		padding: 1px;
-		padding-left: 10px;
-		padding-right: 10px;
-		text-align=left;
+		width: 100%;
+		padding: 10px;
+
+		background: #64C260;
+		font-family: arial;
+		font-size: 23px;
+		color: white;
 	}
 
 	.table{
+		width: 96%;
+
 		font-family: arial;
-		border-spacing: 10px;
 	}
 
 	.input{
-		width: 100px;
+		width: 92%;
+		padding: 4%;
+
 		font-size: 17px;
+
 		border-radius: 0px;
 		border-width: 0px;
 		border-bottom-width: 1px;
 		border-color: #E7E9EB;
 	}
 
-  .tabbar {
-  	font-family: arial;
-  	position: fixed;
-  	bottom: 0;
-  	width:  100%;
-  	padding-top: 5px;
-
-  	background:#F6F6F6;
-		color: #949494;
+	.tabbar {
+		width:  100%;
+		padding-top: 5px;
+		position: fixed;
+		bottom: 0;
+		
+		background: #F6F6F6;
+		font-family: arial;
 		font-size: 10pt;
+		color: #949494;
 
 		border: 0px solid #B2B2B2;
 		border-top-width: 1px;
@@ -149,23 +152,25 @@
 
 	.tabbar_table{
 		width:100%;
+
 		text-align: center;
 	}
 
-  .reset_button{
-  	font-size: 17px;
-  	color: black;
-  	font-weight: regular;
-  	padding: 10px;
-  	padding-left: 20px;
-  	padding-right: 20px;
-  	background-color: #E9E9EB;
-    border-radius: 30px;
-    border: 1px;
-    box-shadow: none;
-    outline: 0;
-    margin: 8px;
-  }
+	.resetButton{
+		padding: 10px;
+		padding-left: 20px;
+		padding-right: 20px;
+
+		background-color: #E9E9EB;
+		font-size: 17px;
+		font-weight: regular;
+		color: black;
+
+		border-radius: 30px;
+		border: 1px;
+		box-shadow: none;
+		outline: 0;
+	}
 </style>
 
 </head>
@@ -175,51 +180,51 @@
 
 <!-- Header -->
 <div class="header">
-	<div id="title" style="margin: 10px;">100grams</div>
+	<div id="title">100grams</div>
 </div>
 
 <!-- Table -->
 <p></p>
 	<table class="table" align="center">
-  	<tr>
-    	<th id="pr_h">Price</th>
-    	<th id="un_h">Weight (g.)</th>
-    	<th id="pfun_h">Price for 100 g.</th>
-  	</tr>
-  	<tr>
-    	<td><input class="input" type="text" inputmode="decimal" id="pr_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="input" type="text" inputmode="decimal" id="wt_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td style="text-align: center;"><div id="pw_0">0</div></td>
-  	</tr>
-  	<tr>
-    	<td><input class="input" type="text" inputmode="decimal" id="pr_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="input" type="text" inputmode="decimal" id="wt_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td style="text-align: center;"><div id="pw_1">0</div></td>
-  	</tr>
-  	<tr>
-    	<td><input class="input" type="text" inputmode="decimal" id="pr_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="input" type="text" inputmode="decimal" id="wt_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td style="text-align: center;"><div id="pw_2">0</div></td>
-  	</tr>
-  	<tr>
-    	<td><input class="input" type="text" inputmode="decimal" id="pr_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="input" type="text" inputmode="decimal" id="wt_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td style="text-align: center;"><div id="pw_3">0</div></td>
-  	</tr>
-  	<tr>
-    	<td><input class="input" type="text" inputmode="decimal" id="pr_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="input" type="text" inputmode="decimal" id="wt_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td style="text-align: center;"><div id="pw_4">0</div></td>
-  	</tr>
-  	<tr>
-    	<td><input class="input" type="text" inputmode="decimal" id="pr_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td><input class="input" type="text" inputmode="decimal" id="wt_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-    	<td style="text-align: center;"><div id="pw_5">0</div></td>
-  	</tr>
+		<tr>
+			<th id="pr_h" style="width: 33%;">Price</th>
+			<th id="un_h" style="width: 33%;">Weight (g.)</th>
+			<th id="pfun_h" style="width: 33%;">Price for 100 g.</th>
+		</tr>
+		<tr>
+			<td><input class="input" type="text" inputmode="decimal" id="pr_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td><input class="input" type="text" inputmode="decimal" id="wt_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td style="text-align: center;"><div id="pw_0">0</div></td>
+		</tr>
+		<tr>
+			<td><input class="input" type="text" inputmode="decimal" id="pr_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td><input class="input" type="text" inputmode="decimal" id="wt_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td style="text-align: center;"><div id="pw_1">0</div></td>
+		</tr>
+		<tr>
+			<td><input class="input" type="text" inputmode="decimal" id="pr_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td><input class="input" type="text" inputmode="decimal" id="wt_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td style="text-align: center;"><div id="pw_2">0</div></td>
+		</tr>
+		<tr>
+			<td><input class="input" type="text" inputmode="decimal" id="pr_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td><input class="input" type="text" inputmode="decimal" id="wt_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td style="text-align: center;"><div id="pw_3">0</div></td>
+		</tr>
+		<tr>
+			<td><input class="input" type="text" inputmode="decimal" id="pr_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td><input class="input" type="text" inputmode="decimal" id="wt_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td style="text-align: center;"><div id="pw_4">0</div></td>
+		</tr>
+		<tr>
+			<td><input class="input" type="text" inputmode="decimal" id="pr_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td><input class="input" type="text" inputmode="decimal" id="wt_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+			<td style="text-align: center;"><div id="pw_5">0</div></td>
+		</tr>
 	</table>
 
 	<p align="center">
-	<button type="button" class="reset_button" id="resetButton" onclick="reset()">Reset</button>
+	<button type="button" class="resetButton" id="resetButton" onclick="reset()">Reset</button>
 	</p>
 
 <!-- Tabbar -->
@@ -227,15 +232,15 @@
 		<table class="tabbar_table" align="center">
 			<tr>
 				<td onclick="changeMode(100)" style="width: 50%;">
-					<img id="mode100_icon" src="/100grams/icons/100grams_on.svg" width="20" height="20"></img>
+					<img id="mode100icon" src="100grams/icons/100grams_on.svg" alt="100 gramm mode icon" width="20" height="20"></img>
 				</td>
 				<td onclick="changeMode(1)">
-					<img id="mode1_icon" src="/100grams/icons/1piece_off.svg" width="20" height="20"></img>
+					<img id="mode1icon" src="100grams/icons/1piece_off.svg" alt="1 piece mode icon" width="20" height="20"></img>
 				</td>
 			</tr>
 			<tr>
-				<td id="mode100_text" style="color: #3478F5;">100grams</td>
-				<td id="mode1_text">1piece</td>
+				<td id="mode100text" style="color: #3478F5;">100grams</td>
+				<td id="mode1text">1piece</td>
 			</tr>
 		</table>
 </div>
