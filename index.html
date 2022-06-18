@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, viewport-fit=cover">
 	<meta name="theme-color" content="#64C260" media="(prefers-color-scheme: light)">
+	<meta name="theme-color" content="#64C260" media="(prefers-color-scheme: dark)">
 	<title>100grams</title>
 
 	<!-- Icon for iPhone -->
@@ -11,14 +12,66 @@
 
 <!-- Javascript -->
 <script type="text/javascript">
+	var g_pageBackground    = "#FFFFFF";
+	var g_textRegular       = "#000000";
+	var g_resetButtonColor  = "#E9E9EB";
+	var g_textActive        = "#3478F5";
+	var g_textInactive      = "#949494";
+	var g_tabbarColor       = "#F6F6F6";
+	var g_tabbarBorder      = "0px solid #B2B2B2";
+
+	function darkMode(){
+		var pageBackgroundLight    = "#FFFFFF";
+		var pageBackgroundDark     = "#1C1C1E";
+		var textRegularLight       = "#000000";
+		var textRegularDark        = "#FFFFFF";
+		var resetButtonColorLight  = "#E9E9EB";
+		var resetButtonColorDark   = "#39393D";
+		var textActiveLight        = "#3478F5";
+		var textActiveDark         = "#5A91F7";
+		var textInactiveLight      = "#949494";
+		var textInactiveDark       = "#4C4C4C";
+		var tabbarColorLight       = "#F6F6F6";
+		var tabbarColorDark        = "#282829";
+		var tabbarBorderLight      = "0px solid #B2B2B2";
+		var tabbarBorderDark       = "0px solid #404143";
+
+    	g_pageBackground    = pageBackgroundDark;
+		g_textRegular       = textRegularDark;
+		g_resetButtonColor  = resetButtonColorDark;
+		g_textActive        = textActiveDark;
+		g_textInactive      = textInactiveDark;
+		g_tabbarColor       = tabbarColorDark;
+		g_tabbarBorder      = tabbarBorderDark;
+
+		document.body.style.background = g_pageBackground;
+		document.getElementById('title').style.color = g_pageBackground;
+
+		document.getElementById('inputTable').style.color = g_textRegular;
+		for (var i = 0; i < g_numberOfInputRows; ++i) {
+			document.getElementById("pr_" + i).style.backgroundColor = pageBackgroundDark;
+			document.getElementById("pr_" + i).style.color = textRegularDark;
+			document.getElementById("wt_" + i).style.backgroundColor = pageBackgroundDark;
+			document.getElementById("wt_" + i).style.color = textRegularDark;
+		};
+
+		document.getElementById('resetButton').style.backgroundColor = g_resetButtonColor;
+		document.getElementById('resetButton').style.color = g_textRegular;
+
+		document.getElementById("tabbar").style.background = g_tabbarColor;
+		document.getElementById("tabbar").style.border = g_tabbarBorder;
+		document.getElementById("mode100icon").style.fill = g_textActive;
+		document.getElementById("mode100text").style.color = g_textActive;
+		document.getElementById("mode1icon").style.fill = g_textInactive;
+		document.getElementById("mode1text").style.color = g_textInactive;
+	}
 
 	var g_numberOfInputRows = 6;
 	var g_mode = 100;
 
 	const text = ["100grams", "Price", "Weight(g.)", "Price for 100g.", "Reset", "Pieces", "Price for piece", "100grams", "1piece"];
 	const ruText = ["100грамм", "Цена", "Вес(г.)", "Цена за 100г.", "Сброс", "Штук в уп.", "Цена за штуку", "100грамм", "1штука"];
-	const icons = ["/100grams/icons/100grams_off.svg", "/100grams/icons/100grams_on.svg", "/100grams/icons/1piece_off.svg", "/100grams/icons/1piece_on.svg"];
-
+	
 	function setLocale(){
 		var locale = navigator.language;
 		locale = locale.substring(0,2);
@@ -35,6 +88,10 @@
 		document.getElementById("resetButton").innerHTML=text[4];
 		document.getElementById("mode100text").innerHTML=text[7];
 		document.getElementById("mode1text").innerHTML=text[8];
+
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			darkMode();
+		};
 	}
 
 	function changeMode(setMode){
@@ -43,20 +100,20 @@
 
 			document.getElementById("un_h").innerHTML=text[2];
 			document.getElementById("pfun_h").innerHTML=text[3];
-			document.getElementById("mode100icon").src=icons[1];
-			document.getElementById("mode1icon").src=icons[2];
-			document.getElementById("mode100text").style.color = "#3478F5";
-			document.getElementById("mode1text").style.color = "#949494";
+			document.getElementById("mode100icon").style.fill = g_textActive;;
+			document.getElementById("mode1icon").style.fill = g_textInactive;
+			document.getElementById("mode100text").style.color = g_textActive;
+			document.getElementById("mode1text").style.color = g_textInactive;
 		} 
 		else {
 			g_mode = 1;
 
 			document.getElementById("un_h").innerHTML=text[5];
 			document.getElementById("pfun_h").innerHTML=text[6];
-			document.getElementById("mode100icon").src=icons[0];
-			document.getElementById("mode1icon").src=icons[3];
-			document.getElementById("mode100text").style.color = "#949494";
-			document.getElementById("mode1text").style.color = "#3478F5";
+			document.getElementById("mode100icon").style.fill = g_textInactive;
+			document.getElementById("mode1icon").style.fill = g_textActive;
+			document.getElementById("mode100text").style.color = g_textInactive;
+			document.getElementById("mode1text").style.color = g_textActive;
 		};
 
 		reset();
@@ -104,6 +161,7 @@
 <!-- CSS -->
 <style type="text/css">
 	body { 
+		background: #FFFFFF;
 		margin: 0;
 		overscroll-behavior-y: none;
 	}
@@ -118,10 +176,11 @@
 		color: white;
 	}
 
-	.table{
+	.inputTable{
 		width: 96%;
 
 		font-family: arial;
+		color:  #000000;
 	}
 
 	.input{
@@ -186,7 +245,7 @@
 
 <!-- Table -->
 <p></p>
-	<table class="table" align="center">
+	<table class="inputTable" id="inputTable" align="center">
 		<tr>
 			<th id="pr_h" style="width: 33%;">Price</th>
 			<th id="un_h" style="width: 33%;">Weight (g.)</th>
@@ -229,14 +288,37 @@
 	</p>
 
 <!-- Tabbar -->
-<div class="tabbar">
+<div class="tabbar" id="tabbar">
 		<table class="tabbar_table" align="center">
 			<tr>
 				<td onclick="changeMode(100)" style="width: 50%;">
-					<img id="mode100icon" src="/100grams/icons/100grams_on.svg" alt="100 gramm mode icon" width="20" height="20"></img>
+					<svg id="mode100icon" width="20" height="20" viewBox="0 0 47 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill: #3478F5;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    					<g>
+        				<g transform="matrix(-1,0,0,1,47.5913,2)">
+            			<path d="M31.01,32.4C29.641,30.977 21.536,37.297 19.617,39.691C17.941,41.784 24.14,45.663 25.33,44.297C27.155,42.199 32.465,33.912 31.01,32.4Z"/>
+        				</g>
+        				<g transform="matrix(1,0,0,1,0,2)">
+            			<path d="M3.191,41.844C3.137,38.733 3.377,37.058 4.061,35.22C6.386,28.97 9.623,26.935 11.74,25.364C13.686,23.92 15.551,23.015 21.017,22.971C21.286,22.969 22.802,22.976 23.899,22.965C24.727,22.957 25.393,22.279 25.385,21.451C25.377,20.623 24.698,19.957 23.87,19.965C22.776,19.976 21.262,19.969 20.993,19.971C14.468,20.023 12.276,21.231 9.953,22.955C7.547,24.74 3.891,27.071 1.249,34.174C0.352,36.584 0.055,38.744 0.236,43.418C0.236,43.422 0.515,44.873 1.98,44.858C3.316,44.844 10.134,44.758 12.884,44.758C13.712,44.758 14.384,44.086 14.384,43.258C14.384,42.43 13.712,41.758 12.884,41.758C10.635,41.758 5.673,41.815 3.191,41.844Z"/>
+        				</g>
+        				<g transform="matrix(-1,0,0,1,47.0422,2)">
+            			<path d="M3.191,41.844C5.673,41.815 10.635,41.758 12.884,41.758C13.712,41.758 14.384,42.43 14.384,43.258C14.384,44.086 13.712,44.758 12.884,44.758C10.134,44.758 3.316,44.844 1.98,44.858C0.515,44.873 0.236,43.422 0.236,43.418C0.055,38.744 0.352,36.584 1.249,34.174C3.891,27.071 7.547,24.74 9.953,22.955C12.276,21.231 14.468,20.023 20.993,19.971C21.262,19.969 22.776,19.976 23.87,19.965C24.698,19.957 25.377,20.623 25.385,21.451C25.393,22.279 24.727,22.957 23.899,22.965C22.802,22.976 21.286,22.969 21.017,22.971C15.551,23.015 13.686,23.92 11.74,25.364C9.623,26.935 6.386,28.97 4.061,35.22C3.377,37.058 3.137,38.733 3.191,41.844Z"/>
+        				</g>
+        				<g transform="matrix(1.10293,0,0,1,-2.88491,0)">
+            			<rect x="19.809" y="9.33" width="8.218" height="13.111"/>
+        				</g>
+        				<g transform="matrix(-1,0,0,1,47.0956,0)">
+            			<path d="M23.526,11.452C17.462,11.538 11.479,10.85 9.323,10C8.231,9.569 5.296,8.289 3.119,6.539C1.367,5.132 0.157,3.387 0.157,1.599C0.157,0.771 0.828,0.099 1.657,0.099C5.7,0.099 14.466,0.025 23.213,-0.038C24.041,-0.044 24.718,0.624 24.724,1.451C24.73,2.279 24.063,2.956 23.235,2.962C15.807,3.015 8.366,3.077 3.808,3.094C4.136,3.481 4.557,3.846 4.998,4.201C6.899,5.729 9.471,6.833 10.424,7.209C12.405,7.991 17.912,8.531 23.483,8.452C24.311,8.44 24.993,9.103 25.005,9.93C25.016,10.758 24.354,11.44 23.526,11.452Z"/>
+        				</g>
+        				<path d="M23.468,8.452C17.912,8.588 12.403,7.99 10.424,7.209C9.471,6.833 6.899,5.729 4.998,4.201C4.557,3.846 4.136,3.481 3.808,3.094C8.366,3.077 15.807,3.015 23.235,2.962C24.063,2.956 24.73,2.279 24.724,1.451C24.718,0.624 24.041,-0.044 23.213,-0.038C14.466,0.025 5.7,0.099 1.657,0.099C0.828,0.099 0.157,0.771 0.157,1.599C0.157,3.387 1.367,5.132 3.119,6.539C5.296,8.289 8.231,9.569 9.323,10C11.481,10.851 17.481,11.6 23.542,11.451C24.369,11.431 25.025,10.743 25.004,9.915C24.984,9.087 24.296,8.432 23.468,8.452Z"/>
+    					</g>
+					</svg>
 				</td>
 				<td onclick="changeMode(1)">
-					<img id="mode1icon" src="/100grams/icons/1piece_off.svg" alt="1 piece mode icon" width="20" height="20"></img>
+					<svg id="mode1icon" width="20" height="20" viewBox="0 0 47 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill: #949494;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    					<g transform="matrix(2.93609,0,0,2.93609,0,1.10468e-30)">
+        				<path d="M2.95,0.4C3.139,0.148 3.435,0 3.75,0L12.25,0C12.565,-0 12.861,0.148 13.05,0.4L15.9,4.2C15.965,4.287 16,4.392 16,4.5L16,15C16,15.549 15.549,16 15,16L1,16C0.451,16 0,15.549 0,15L0,4.5C0,4.392 0.035,4.287 0.1,4.2L2.95,0.4ZM7.5,1L3.75,1L1.5,4L7.5,4L7.5,1ZM8.5,1L8.5,4L14.5,4L12.25,1L8.5,1ZM15,5L1,5L1,15L15,15L15,5Z"/>
+    					</g>
+					</svg>
 				</td>
 			</tr>
 			<tr>
