@@ -14,30 +14,29 @@
 <script type="text/javascript">
 	var g_pageBackground    = "#FFFFFF";
 	var g_textRegular       = "#000000";
+	var g_inputBorder       = "1px solid #E7E9EB";
 	var g_resetButtonColor  = "#E9E9EB";
 	var g_textActive        = "#3478F5";
 	var g_textInactive      = "#949494";
 	var g_tabbarColor       = "#F6F6F6";
-	var g_tabbarBorder      = "0px solid #B2B2B2";
+	var g_tabbarBorder      = "1px solid #B2B2B2";
 
 	function darkMode(){
-		var pageBackgroundLight    = "#FFFFFF";
+
+		document.getElementById("title").onclick = lightMode;
+
 		var pageBackgroundDark     = "#1C1C1E";
-		var textRegularLight       = "#000000";
 		var textRegularDark        = "#FFFFFF";
-		var resetButtonColorLight  = "#E9E9EB";
+		var inputBorderDark        = "1px solid #404043";
 		var resetButtonColorDark   = "#39393D";
-		var textActiveLight        = "#3478F5";
 		var textActiveDark         = "#5A91F7";
-		var textInactiveLight      = "#949494";
 		var textInactiveDark       = "#4C4C4C";
-		var tabbarColorLight       = "#F6F6F6";
 		var tabbarColorDark        = "#282829";
-		var tabbarBorderLight      = "0px solid #B2B2B2";
-		var tabbarBorderDark       = "0px solid #404143";
+		var tabbarBorderDark       = "1px solid #404043";
 
     	g_pageBackground    = pageBackgroundDark;
 		g_textRegular       = textRegularDark;
+		g_inputBorder       = inputBorderDark;
 		g_resetButtonColor  = resetButtonColorDark;
 		g_textActive        = textActiveDark;
 		g_textInactive      = textInactiveDark;
@@ -49,17 +48,65 @@
 
 		document.getElementById('inputTable').style.color = g_textRegular;
 		for (var i = 0; i < g_numberOfInputRows; ++i) {
-			document.getElementById("pr_" + i).style.backgroundColor = pageBackgroundDark;
-			document.getElementById("pr_" + i).style.color = textRegularDark;
-			document.getElementById("wt_" + i).style.backgroundColor = pageBackgroundDark;
-			document.getElementById("wt_" + i).style.color = textRegularDark;
+			document.getElementById("pr_" + i).style.backgroundColor = g_pageBackground;
+			document.getElementById("pr_" + i).style.color = g_textRegular;
+			document.getElementById("pr_" + i).style.borderBottom = g_inputBorder;
+			document.getElementById("wt_" + i).style.backgroundColor = g_pageBackground;
+			document.getElementById("wt_" + i).style.color = g_textRegular;
+			document.getElementById("wt_" + i).style.borderBottom = g_inputBorder;
 		};
 
 		document.getElementById('resetButton').style.backgroundColor = g_resetButtonColor;
 		document.getElementById('resetButton').style.color = g_textRegular;
 
 		document.getElementById("tabbar").style.background = g_tabbarColor;
-		document.getElementById("tabbar").style.border = g_tabbarBorder;
+		document.getElementById("tabbar").style.borderTop = g_tabbarBorder;
+		document.getElementById("mode100icon").style.fill = g_textActive;
+		document.getElementById("mode100text").style.color = g_textActive;
+		document.getElementById("mode1icon").style.fill = g_textInactive;
+		document.getElementById("mode1text").style.color = g_textInactive;
+	}
+
+	function lightMode(){
+
+		document.getElementById("title").onclick = darkMode;
+
+		var pageBackgroundLight    = "#FFFFFF";
+		var textRegularLight       = "#000000";
+		var inputBorderLight       = "1px solid #E7E9EB";
+		var resetButtonColorLight  = "#E9E9EB";
+		var textActiveLight        = "#3478F5";
+		var textInactiveLight      = "#949494";
+		var tabbarColorLight       = "#F6F6F6";
+		var tabbarBorderLight      = "1px solid #B2B2B2";
+
+    	g_pageBackground    = pageBackgroundLight;
+		g_textRegular       = textRegularLight;
+		g_inputBorder       = inputBorderLight;
+		g_resetButtonColor  = resetButtonColorLight;
+		g_textActive        = textActiveLight;
+		g_textInactive      = textInactiveLight;
+		g_tabbarColor       = tabbarColorLight;
+		g_tabbarBorder      = tabbarBorderLight;
+
+		document.body.style.background = g_pageBackground;
+		document.getElementById('title').style.color = g_pageBackground;
+
+		document.getElementById('inputTable').style.color = g_textRegular;
+		for (var i = 0; i < g_numberOfInputRows; ++i) {
+			document.getElementById("pr_" + i).style.backgroundColor = g_pageBackground;
+			document.getElementById("pr_" + i).style.color = g_textRegular;
+			document.getElementById("pr_" + i).style.borderBottom = g_inputBorder;
+			document.getElementById("wt_" + i).style.backgroundColor = g_pageBackground;
+			document.getElementById("wt_" + i).style.color = g_textRegular;
+			document.getElementById("wt_" + i).style.borderBottom = g_inputBorder;
+		};
+
+		document.getElementById('resetButton').style.backgroundColor = g_resetButtonColor;
+		document.getElementById('resetButton').style.color = g_textRegular;
+
+		document.getElementById("tabbar").style.background = g_tabbarColor;
+		document.getElementById("tabbar").style.borderTop = g_tabbarBorder;
 		document.getElementById("mode100icon").style.fill = g_textActive;
 		document.getElementById("mode100text").style.color = g_textActive;
 		document.getElementById("mode1icon").style.fill = g_textInactive;
@@ -94,6 +141,42 @@
 		};
 	}
 
+	var mode100saveArray = ["0","0","0","0","0","0","0","0","0","0","0","0"];
+	var mode1saveArray = ["0","0","0","0","0","0","0","0","0","0","0","0"];
+
+	function saveValues(){
+		if(g_mode == 1){
+			for (var i = 0; i < g_numberOfInputRows; ++i) {
+				mode100saveArray[i] = document.getElementById("pr_" + i).value;
+				mode100saveArray[i+6] = document.getElementById("wt_" + i).value;	
+			};
+		};
+		if(g_mode == 100){
+			for (var i = 0; i < g_numberOfInputRows; ++i) {
+				mode1saveArray[i] = document.getElementById("pr_" + i).value;
+				mode1saveArray[i+6] = document.getElementById("wt_" + i).value;	
+			};
+		};
+	}
+
+	function loadValues(){
+		if(g_mode == 1){
+			for (var i = 0; i < g_numberOfInputRows; ++i) {
+				document.getElementById("pr_" + i).value = mode1saveArray[i];
+				document.getElementById("wt_" + i).value = mode1saveArray[i+6];
+				document.getElementById("pw_" + i).innerHTML = "0";
+			};
+		};
+		if(g_mode == 100){
+			for (var i = 0; i < g_numberOfInputRows; ++i) {
+				document.getElementById("pr_" + i).value = mode100saveArray[i];
+				document.getElementById("wt_" + i).value = mode100saveArray[i+6];
+				document.getElementById("pw_" + i).innerHTML = "0";
+			};
+		};
+		calculate();
+	}
+
 	function changeMode(setMode){
 		if (setMode == 100) {
 			g_mode = 100;
@@ -116,7 +199,8 @@
 			document.getElementById("mode1text").style.color = g_textActive;
 		};
 
-		reset();
+		saveValues();
+		loadValues();
 	}
 
 	function calculate(){
@@ -190,9 +274,8 @@
 		font-size: 17px;
 
 		border-radius: 0px;
-		border-width: 0px;
+		border: 0px solid #E7E9EB;
 		border-bottom-width: 1px;
-		border-color: #E7E9EB;
 	}
 
 	.tabbar {
@@ -208,7 +291,7 @@
 
 		border: 0px solid #B2B2B2;
 		border-top-width: 1px;
-}
+	}
 
 	.tabbar_table{
 		width:100%;
@@ -240,7 +323,7 @@
 
 <!-- Header -->
 <div class="header">
-	<div id="title">100grams</div>
+	<div id="title" onclick="darkMode()">100grams</div>
 </div>
 
 <!-- Table -->
