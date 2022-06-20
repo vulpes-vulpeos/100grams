@@ -12,112 +12,96 @@
 
 <!-- Javascript -->
 <script type="text/javascript">
-	var g_pageBackground    = "#FFFFFF";
-	var g_textRegular       = "#000000";
-	var g_inputBorder       = "1px solid #E7E9EB";
-	var g_resetButtonColor  = "#E9E9EB";
-	var g_textActive        = "#3478F5";
-	var g_textInactive      = "#949494";
-	var g_tabbarColor       = "#F6F6F6";
-	var g_tabbarBorder      = "1px solid #B2B2B2";
+	var g_textActive        = "#397DF6";
+	var g_textInactive      = "#999999";
 
 	function darkMode(){
-
 		document.getElementById("title").onclick = lightMode;
 
-		var pageBackgroundDark     = "#1C1C1E";
-		var textRegularDark        = "#FFFFFF";
-		var inputBorderDark        = "1px solid #404043";
-		var resetButtonColorDark   = "#39393D";
-		var textActiveDark         = "#5A91F7";
-		var textInactiveDark       = "#4C4C4C";
-		var tabbarColorDark        = "#282829";
-		var tabbarBorderDark       = "1px solid #404043";
+		document.body.style.background = "#1C1C1E";
 
-    	g_pageBackground    = pageBackgroundDark;
-		g_textRegular       = textRegularDark;
-		g_inputBorder       = inputBorderDark;
-		g_resetButtonColor  = resetButtonColorDark;
-		g_textActive        = textActiveDark;
-		g_textInactive      = textInactiveDark;
-		g_tabbarColor       = tabbarColorDark;
-		g_tabbarBorder      = tabbarBorderDark;
+		document.getElementById('header').className = "header headerDark";
+		document.getElementById('inputTable').className = "inputTable inputTableDark";
 
-		document.body.style.background = g_pageBackground;
-		document.getElementById('title').style.color = g_pageBackground;
-
-		document.getElementById('inputTable').style.color = g_textRegular;
-		for (var i = 0; i < g_numberOfInputRows; ++i) {
-			document.getElementById("pr_" + i).style.backgroundColor = g_pageBackground;
-			document.getElementById("pr_" + i).style.color = g_textRegular;
-			document.getElementById("pr_" + i).style.borderBottom = g_inputBorder;
-			document.getElementById("wt_" + i).style.backgroundColor = g_pageBackground;
-			document.getElementById("wt_" + i).style.color = g_textRegular;
-			document.getElementById("wt_" + i).style.borderBottom = g_inputBorder;
+		const inputRowsList = document.getElementsByClassName("inputRow");
+		for (let i = 0; i < inputRowsList.length; i++) {
+  			inputRowsList[i].className = "inputRow inputRowDark";
 		};
 
-		document.getElementById('resetButton').style.backgroundColor = g_resetButtonColor;
-		document.getElementById('resetButton').style.color = g_textRegular;
+		const inputFieldsList = document.getElementsByClassName("input");
+		for (let i = 0; i < inputFieldsList.length; i++) {
+  			inputFieldsList[i].className = "input inputDark";
+		};
 
-		document.getElementById("tabbar").style.background = g_tabbarColor;
-		document.getElementById("tabbar").style.borderTop = g_tabbarBorder;
-		document.getElementById("mode100icon").style.fill = g_textActive;
-		document.getElementById("mode100text").style.color = g_textActive;
-		document.getElementById("mode1icon").style.fill = g_textInactive;
-		document.getElementById("mode1text").style.color = g_textInactive;
+		const inputResultsList = document.getElementsByClassName("result");
+		for (let i = 0; i < inputResultsList.length; i++) {
+  			inputResultsList[i].className = "result inputDark";
+		};
+
+		document.getElementById('resetButton').className = "resetButton resetButtonDark";
+
+		document.getElementById("tabbar").className = "tabbar tabbarDark";
+
+		g_textActive        = "#5A91F7";
+		g_textInactive      = "#757575";
+
+		if (g_mode == 100){
+			document.getElementById("mode100icon").style.fill = g_textActive; //active icon
+			document.getElementById("mode1icon").style.fill = g_textInactive;   //inactive icon
+		}
+		else{
+			document.getElementById("mode100icon").style.fill = g_textInactive;
+			document.getElementById("mode1icon").style.fill = g_textActive;
+		}
+		
 	}
 
 	function lightMode(){
-
 		document.getElementById("title").onclick = darkMode;
 
-		var pageBackgroundLight    = "#FFFFFF";
-		var textRegularLight       = "#000000";
-		var inputBorderLight       = "1px solid #E7E9EB";
-		var resetButtonColorLight  = "#E9E9EB";
-		var textActiveLight        = "#3478F5";
-		var textInactiveLight      = "#949494";
-		var tabbarColorLight       = "#F6F6F6";
-		var tabbarBorderLight      = "1px solid #B2B2B2";
+		document.body.style.background = "#FFFFFF";
 
-    	g_pageBackground    = pageBackgroundLight;
-		g_textRegular       = textRegularLight;
-		g_inputBorder       = inputBorderLight;
-		g_resetButtonColor  = resetButtonColorLight;
-		g_textActive        = textActiveLight;
-		g_textInactive      = textInactiveLight;
-		g_tabbarColor       = tabbarColorLight;
-		g_tabbarBorder      = tabbarBorderLight;
+		document.getElementById('header').className = "header headerLight";
+		document.getElementById('inputTable').className = "inputTable inputTableLight";
 
-		document.body.style.background = g_pageBackground;
-		document.getElementById('title').style.color = g_pageBackground;
-
-		document.getElementById('inputTable').style.color = g_textRegular;
-		for (var i = 0; i < g_numberOfInputRows; ++i) {
-			document.getElementById("pr_" + i).style.backgroundColor = g_pageBackground;
-			document.getElementById("pr_" + i).style.color = g_textRegular;
-			document.getElementById("pr_" + i).style.borderBottom = g_inputBorder;
-			document.getElementById("wt_" + i).style.backgroundColor = g_pageBackground;
-			document.getElementById("wt_" + i).style.color = g_textRegular;
-			document.getElementById("wt_" + i).style.borderBottom = g_inputBorder;
+		const inputRowsList = document.getElementsByClassName("inputRow");
+		for (let i = 0; i < inputRowsList.length; i++) {
+  			inputRowsList[i].className = "inputRow inputRowLight";
 		};
 
-		document.getElementById('resetButton').style.backgroundColor = g_resetButtonColor;
-		document.getElementById('resetButton').style.color = g_textRegular;
+		const inputFieldsList = document.getElementsByClassName("input");
+		for (let i = 0; i < inputFieldsList.length; i++) {
+  			inputFieldsList[i].className = "input inputLight";
+		};
 
-		document.getElementById("tabbar").style.background = g_tabbarColor;
-		document.getElementById("tabbar").style.borderTop = g_tabbarBorder;
-		document.getElementById("mode100icon").style.fill = g_textActive;
-		document.getElementById("mode100text").style.color = g_textActive;
-		document.getElementById("mode1icon").style.fill = g_textInactive;
-		document.getElementById("mode1text").style.color = g_textInactive;
+		const inputResultsList = document.getElementsByClassName("result");
+		for (let i = 0; i < inputResultsList.length; i++) {
+  			inputResultsList[i].className = "result inputLight";
+		};
+
+		document.getElementById('resetButton').className = "resetButton resetButtonLight";
+
+		document.getElementById("tabbar").className = "tabbar tabbarLight";
+		g_textActive        = "#397DF6";
+		g_textInactive      = "#999999";
+
+		if (g_mode == 100){
+			document.getElementById("mode100icon").style.fill = g_textActive;
+			document.getElementById("mode1icon").style.fill = g_textInactive;
+		}
+		else{
+			document.getElementById("mode100icon").style.fill = g_textInactive;
+			document.getElementById("mode1icon").style.fill = g_textActive;
+		}
 	}
 
 	var g_numberOfInputRows = 6;
 	var g_mode = 100;
 
-	const text = ["100grams", "Price", "Weight(g.)", "Price for 100g.", "Reset", "Pieces", "Price for piece", "100grams", "1piece"];
-	const ruText = ["100грамм", "Цена", "Вес(г.)", "Цена за 100г.", "Сброс", "Штук в уп.", "Цена за штуку", "100грамм", "1штука"];
+	const elements = ["title", "pr_h", "un_h", "pfun_h", "resetButton", "mode100text", "mode1text"];
+	const text = ["100grams", "Price", "Weight(g.)", "Price for 100g.", "Reset", "100grams", "1piece", "Pieces", "Price for piece"];
+	const ruText = ["100грамм", "Цена", "Вес(г.)", "Цена за 100г.", "Сброс", "100грамм", "1штука", "Штук в уп.", "Цена за штуку"];
+	const uaText = ["100грамів", "Ціна", "Вага(г.)", "Ціна за 100г.", "Скинути", "100грамів", "1штука", "Штук в уп.", "Ціна за штуку"];
 	
 	function setLocale(){
 		var locale = navigator.language;
@@ -127,14 +111,15 @@
 				text[i] = ruText[i];
 			};
 		};
+		if (locale.includes("ua")){
+			for (var i = 0; i < text.length; ++i){
+				text[i] = uaText[i];
+			};
+		};
 
-		document.getElementById("title").innerHTML=text[0];
-		document.getElementById("pr_h").innerHTML=text[1];
-		document.getElementById("un_h").innerHTML=text[2];
-		document.getElementById("pfun_h").innerHTML=text[3];
-		document.getElementById("resetButton").innerHTML=text[4];
-		document.getElementById("mode100text").innerHTML=text[7];
-		document.getElementById("mode1text").innerHTML=text[8];
+		for (var i = 0; i < elements.length; ++i){
+				document.getElementById(elements[i]).innerHTML = text[i];
+		};
 
 		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 			darkMode();
@@ -183,7 +168,7 @@
 
 			document.getElementById("un_h").innerHTML=text[2];
 			document.getElementById("pfun_h").innerHTML=text[3];
-			document.getElementById("mode100icon").style.fill = g_textActive;;
+			document.getElementById("mode100icon").style.fill = g_textActive;
 			document.getElementById("mode1icon").style.fill = g_textInactive;
 			document.getElementById("mode100text").style.color = g_textActive;
 			document.getElementById("mode1text").style.color = g_textInactive;
@@ -191,8 +176,8 @@
 		else {
 			g_mode = 1;
 
-			document.getElementById("un_h").innerHTML=text[5];
-			document.getElementById("pfun_h").innerHTML=text[6];
+			document.getElementById("un_h").innerHTML=text[7];
+			document.getElementById("pfun_h").innerHTML=text[8];
 			document.getElementById("mode100icon").style.fill = g_textInactive;
 			document.getElementById("mode1icon").style.fill = g_textActive;
 			document.getElementById("mode100text").style.color = g_textInactive;
@@ -224,8 +209,13 @@
 	}
 
 	function numberCheck(id){
-		var number = Number(document.getElementById(id).value);
-		if (number <= 0){
+		var number = document.getElementById(id).value;
+
+		if (number.includes(',')){
+				number = number.replace(/,/g, '.');
+		};
+
+		if (Number(number) <= 0 || isNaN(number)){
 			document.getElementById(id).value = "0";	
 		};
 
@@ -253,18 +243,47 @@
 	.header{
 		width: 96%;
 		padding: 2%;
-
-		background: #64C260;
+		
 		font-family: arial;
 		font-size: 23px;
-		color: white;
+	}
+
+	.headerLight{
+		background: #64C260;
+		color: #FFFFFF;
+	}
+
+	.headerDark{
+		background: #64C260;
+		color: #2B2B2D;
 	}
 
 	.inputTable{
 		width: 96%;
 
 		font-family: arial;
+		border-spacing: 0px 25px;
+	}
+
+	.inputTableLight{
 		color:  #000000;
+	}
+
+	.inputTableDark{
+		color:  #FFFFFF;
+	}
+
+	.inputRow{
+		border-radius: 10px;
+		width: 100%;
+	}
+
+	.inputRowLight{
+		box-shadow: 2px 4px 12px rgba(0,0,0,.08), 0px 0px 1px 1px #E7E9EB;
+	}
+
+	.inputRowDark{
+		box-shadow: 2px 4px 12px rgba(0,0,0,.08), 0px 0px 1px 1px #2B2B2D;
 	}
 
 	.input{
@@ -273,9 +292,22 @@
 
 		font-size: 17px;
 
-		border-radius: 0px;
+		border-radius: 10px;
 		border: 0px solid #E7E9EB;
-		border-bottom-width: 1px;
+	}
+
+	.inputLight{
+		background-color: #FFFFFF;
+		color: #000000;
+	}
+
+	.inputDark{
+		background-color: #1C1C1E;
+		color: #FFFFFF;
+	}
+
+	.result{
+		border-radius: 10px;
 	}
 
 	.tabbar {
@@ -284,12 +316,21 @@
 		position: fixed;
 		bottom: 0;
 		
-		background: #F6F6F6;
 		font-family: arial;
 		font-size: 10pt;
-		color: #949494;
+	}
 
+	.tabbarLight{
+		background: #F6F6F6;
+		color: #999999;
 		border: 0px solid #B2B2B2;
+		border-top-width: 1px;
+	}
+
+	.tabbarDark{
+		background: #282829;
+		color: #757575;
+		border: 0px solid #404043;
 		border-top-width: 1px;
 	}
 
@@ -304,15 +345,25 @@
 		padding-left: 20px;
 		padding-right: 20px;
 
-		background-color: #E9E9EB;
+		margin-bottom: 50px;
+
 		font-size: 17px;
 		font-weight: regular;
-		color: black;
-
+		
 		border-radius: 30px;
 		border: 1px;
 		box-shadow: none;
 		outline: 0;
+	}
+
+	.resetButtonLight{
+		background-color: #E9E9EB;
+		color: #000000;
+	}
+
+	.resetButtonDark{
+		background-color: #39393D;
+		color: #FFFFFF;
 	}
 </style>
 
@@ -322,77 +373,109 @@
 <body onload="javascript:setLocale()">
 
 <!-- Header -->
-<div class="header">
+<div id="header" class="header headerLight">
 	<div id="title" onclick="darkMode()">100grams</div>
 </div>
 
 <!-- Table -->
 <p></p>
-	<table class="inputTable" id="inputTable" align="center">
+	<table class="inputTable inputTableLight" id="inputTable" align="center">
 		<tr>
-			<th id="pr_h" style="width: 33%;">Price</th>
-			<th id="un_h" style="width: 33%;">Weight (g.)</th>
-			<th id="pfun_h" style="width: 33%;">Price for 100 g.</th>
+			<th id="pr_h" width="33%">Price</th>
+			<th id="un_h" width="33%">Weight (g.)</th>
+			<th id="pfun_h" width="33%">Price for 100 g.</th>
 		</tr>
 		<tr>
-			<td><input class="input" type="text" inputmode="decimal" id="pr_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td><input class="input" type="text" inputmode="decimal" id="wt_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td style="text-align: center;"><div id="pw_0">0</div></td>
+			<td colspan = "3">
+			<table class="inputRow inputRowLight">
+				<tr>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%" class="result inputLight" style="text-align: center;"><div id="pw_0">0</div></td>
+				</tr>
+			</table>
+			</td>
 		</tr>
 		<tr>
-			<td><input class="input" type="text" inputmode="decimal" id="pr_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td><input class="input" type="text" inputmode="decimal" id="wt_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td style="text-align: center;"><div id="pw_1">0</div></td>
+			<td colspan = "3">
+			<table class="inputRow inputRowLight">
+				<tr>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%" class="result inputLight" style="text-align: center;"><div id="pw_1">0</div></td>
+				</tr>
+			</table>
+			</td>
 		</tr>
 		<tr>
-			<td><input class="input" type="text" inputmode="decimal" id="pr_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td><input class="input" type="text" inputmode="decimal" id="wt_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td style="text-align: center;"><div id="pw_2">0</div></td>
+			<td colspan = "3">
+			<table class="inputRow inputRowLight">
+				<tr>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%" class="result inputLight" style="text-align: center;"><div id="pw_2">0</div></td>
+				</tr>
+			</table>
+			</td>
 		</tr>
 		<tr>
-			<td><input class="input" type="text" inputmode="decimal" id="pr_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td><input class="input" type="text" inputmode="decimal" id="wt_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td style="text-align: center;"><div id="pw_3">0</div></td>
+			<td colspan = "3">
+			<table class="inputRow inputRowLight">
+				<tr>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%" class="result inputLight" style="text-align: center;"><div id="pw_3">0</div></td>
+				</tr>
+			</table>
+			</td>
 		</tr>
 		<tr>
-			<td><input class="input" type="text" inputmode="decimal" id="pr_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td><input class="input" type="text" inputmode="decimal" id="wt_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td style="text-align: center;"><div id="pw_4">0</div></td>
+			<td colspan = "3">
+			<table class="inputRow inputRowLight">
+				<tr>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%" class="result inputLight" style="text-align: center;"><div id="pw_4">0</div></td>
+				</tr>
+			</table>
+			</td>
 		</tr>
 		<tr>
-			<td><input class="input" type="text" inputmode="decimal" id="pr_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td><input class="input" type="text" inputmode="decimal" id="wt_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-			<td style="text-align: center;"><div id="pw_5">0</div></td>
+			<td colspan = "3">
+			<table class="inputRow inputRowLight">
+				<tr>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
+				<td width="33%" class="result inputLight" style="text-align: center;"><div id="pw_5">0</div></td>
+				</tr>
+			</table>
+			</td>
 		</tr>
 	</table>
 
 	<p align="center">
-	<button type="button" class="resetButton" id="resetButton" onclick="reset()">Reset</button>
+	<button type="button" class="resetButton resetButtonLight" id="resetButton" onclick="reset()">Reset</button>
 	</p>
 
 <!-- Tabbar -->
-<div class="tabbar" id="tabbar">
+<div class="tabbar tabbarLight" id="tabbar">
 		<table class="tabbar_table" align="center">
 			<tr>
 				<td onclick="changeMode(100)" style="width: 50%;">
-					<svg id="mode100icon" width="20" height="20" viewBox="0 0 47 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill: #3478F5;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+					<svg id="mode100icon" width="20" height="20" viewBox="0 0 47 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill: #397DF6;">
     					<g>
-        				<g transform="matrix(-1,0,0,1,47.5913,2)">
+       				 	<g transform="matrix(-1,0,0,1,47.5913,2)">
             			<path d="M31.01,32.4C29.641,30.977 21.536,37.297 19.617,39.691C17.941,41.784 24.14,45.663 25.33,44.297C27.155,42.199 32.465,33.912 31.01,32.4Z"/>
         				</g>
-        				<g transform="matrix(1,0,0,1,0,2)">
-            			<path d="M3.191,41.844C3.137,38.733 3.377,37.058 4.061,35.22C6.386,28.97 9.623,26.935 11.74,25.364C13.686,23.92 15.551,23.015 21.017,22.971C21.286,22.969 22.802,22.976 23.899,22.965C24.727,22.957 25.393,22.279 25.385,21.451C25.377,20.623 24.698,19.957 23.87,19.965C22.776,19.976 21.262,19.969 20.993,19.971C14.468,20.023 12.276,21.231 9.953,22.955C7.547,24.74 3.891,27.071 1.249,34.174C0.352,36.584 0.055,38.744 0.236,43.418C0.236,43.422 0.515,44.873 1.98,44.858C3.316,44.844 10.134,44.758 12.884,44.758C13.712,44.758 14.384,44.086 14.384,43.258C14.384,42.43 13.712,41.758 12.884,41.758C10.635,41.758 5.673,41.815 3.191,41.844Z"/>
-        				</g>
-        				<g transform="matrix(-1,0,0,1,47.0422,2)">
-            			<path d="M3.191,41.844C5.673,41.815 10.635,41.758 12.884,41.758C13.712,41.758 14.384,42.43 14.384,43.258C14.384,44.086 13.712,44.758 12.884,44.758C10.134,44.758 3.316,44.844 1.98,44.858C0.515,44.873 0.236,43.422 0.236,43.418C0.055,38.744 0.352,36.584 1.249,34.174C3.891,27.071 7.547,24.74 9.953,22.955C12.276,21.231 14.468,20.023 20.993,19.971C21.262,19.969 22.776,19.976 23.87,19.965C24.698,19.957 25.377,20.623 25.385,21.451C25.393,22.279 24.727,22.957 23.899,22.965C22.802,22.976 21.286,22.969 21.017,22.971C15.551,23.015 13.686,23.92 11.74,25.364C9.623,26.935 6.386,28.97 4.061,35.22C3.377,37.058 3.137,38.733 3.191,41.844Z"/>
+        				<g transform="matrix(1,0,0,1,0.0571536,2)">
+           				 <path d="M3.008,41.988C2.942,38.836 3.144,37.064 3.83,35.22C6.155,28.969 9.324,26.842 11.441,25.271C13.392,23.824 15.537,23.015 21.017,22.971C21.284,22.969 25.758,22.969 26.025,22.971C31.495,23.015 33.458,23.816 35.406,25.261C37.522,26.831 40.656,28.969 42.981,35.22C43.667,37.064 43.946,38.836 43.899,41.987C41.425,41.987 36.453,41.981 34.203,41.981C33.375,41.981 32.703,42.653 32.703,43.481C32.703,44.309 33.375,44.981 34.203,44.981C36.957,44.981 43.791,44.99 45.13,44.988C46.587,44.986 46.857,43.549 46.857,43.545C47.037,38.875 46.689,36.582 45.793,34.174C43.151,27.071 39.598,24.636 37.193,22.852C34.871,21.129 32.57,20.023 26.049,19.971C25.779,19.969 21.263,19.969 20.993,19.971C14.482,20.023 11.972,21.142 9.653,22.862C7.248,24.646 3.66,27.072 1.018,34.174C0.122,36.582 -0.126,38.875 0.055,43.545C0.055,43.549 0.324,44.985 1.78,44.988C3.119,44.991 9.949,44.987 12.703,44.987C13.531,44.987 14.203,44.315 14.203,43.487C14.203,42.659 13.531,41.987 12.703,41.987C10.452,41.987 5.48,41.99 3.008,41.988Z"/>
         				</g>
         				<g transform="matrix(1.10293,0,0,1,-2.88491,0)">
             			<rect x="19.809" y="9.33" width="8.218" height="13.111"/>
         				</g>
         				<g transform="matrix(-1,0,0,1,47.0956,0)">
-            			<path d="M23.526,11.452C17.462,11.538 11.479,10.85 9.323,10C8.231,9.569 5.296,8.289 3.119,6.539C1.367,5.132 0.157,3.387 0.157,1.599C0.157,0.771 0.828,0.099 1.657,0.099C5.7,0.099 14.466,0.025 23.213,-0.038C24.041,-0.044 24.718,0.624 24.724,1.451C24.73,2.279 24.063,2.956 23.235,2.962C15.807,3.015 8.366,3.077 3.808,3.094C4.136,3.481 4.557,3.846 4.998,4.201C6.899,5.729 9.471,6.833 10.424,7.209C12.405,7.991 17.912,8.531 23.483,8.452C24.311,8.44 24.993,9.103 25.005,9.93C25.016,10.758 24.354,11.44 23.526,11.452Z"/>
+            			<path d="M23.568,0.017L45.596,0.013C46.425,0.013 47.096,0.684 47.096,1.513C47.096,3.29 45.875,5.076 44.105,6.524C41.846,8.371 38.787,9.716 37.635,10.046C33.997,11.089 29.578,11.452 23.591,11.452C23.353,11.452 14.205,11.516 9.43,10.037C8.288,9.684 5.286,8.344 3.07,6.509C1.329,5.068 0.128,3.293 0.128,1.516C0.128,0.687 0.799,0.016 1.628,0.016L23.568,0.017ZM23.569,3.017C23.569,3.017 23.569,3.017 23.568,3.017C23.568,3.017 9.905,3.016 3.757,3.016C4.09,3.428 4.525,3.819 4.983,4.198C6.844,5.739 9.359,6.875 10.317,7.171C14.791,8.557 23.368,8.452 23.591,8.452C29.224,8.452 33.385,8.144 36.809,7.162C37.771,6.887 40.318,5.745 42.206,4.201C42.672,3.82 43.116,3.426 43.456,3.013C37.288,3.014 23.569,3.017 23.569,3.017Z"/>
         				</g>
-        				<path d="M23.468,8.452C17.912,8.588 12.403,7.99 10.424,7.209C9.471,6.833 6.899,5.729 4.998,4.201C4.557,3.846 4.136,3.481 3.808,3.094C8.366,3.077 15.807,3.015 23.235,2.962C24.063,2.956 24.73,2.279 24.724,1.451C24.718,0.624 24.041,-0.044 23.213,-0.038C14.466,0.025 5.7,0.099 1.657,0.099C0.828,0.099 0.157,0.771 0.157,1.599C0.157,3.387 1.367,5.132 3.119,6.539C5.296,8.289 8.231,9.569 9.323,10C11.481,10.851 17.481,11.6 23.542,11.451C24.369,11.431 25.025,10.743 25.004,9.915C24.984,9.087 24.296,8.432 23.468,8.452Z"/>
     					</g>
 					</svg>
 				</td>
