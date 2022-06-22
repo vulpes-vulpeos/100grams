@@ -12,97 +12,105 @@
 
 <!-- Javascript -->
 <script type="text/javascript">
-	var g_textActive        = "#397DF6";
-	var g_textInactive      = "#999999";
-
-	function darkMode(){
-		document.getElementById("title").onclick = lightMode;
-
-		document.body.style.background = "#1C1C1E";
-
-		document.getElementById('header').className = "header headerDark";
-		document.getElementById('inputTable').className = "inputTable inputTableDark";
-
-		const inputRowsList = document.getElementsByClassName("inputRow");
-		for (let i = 0; i < inputRowsList.length; i++) {
-  			inputRowsList[i].className = "inputRow inputRowDark";
-		};
-
-		const inputFieldsList = document.getElementsByClassName("input");
-		for (let i = 0; i < inputFieldsList.length; i++) {
-  			inputFieldsList[i].className = "input inputDark";
-		};
-
-		const inputResultsList = document.getElementsByClassName("result");
-		for (let i = 0; i < inputResultsList.length; i++) {
-  			inputResultsList[i].className = "result inputDark";
-		};
-
-		document.getElementById('resetButton').className = "resetButton resetButtonDark";
-
-		document.getElementById("tabbar").className = "tabbar tabbarDark";
-
-		g_textActive        = "#5A91F7";
-		g_textInactive      = "#757575";
-
-		if (g_mode == 100){
-			document.getElementById("mode100icon").style.fill = g_textActive; //active icon
-			document.getElementById("mode1icon").style.fill = g_textInactive;   //inactive icon
-		}
-		else{
-			document.getElementById("mode100icon").style.fill = g_textInactive;
-			document.getElementById("mode1icon").style.fill = g_textActive;
-		}
-		
-	}
-
-	function lightMode(){
-		document.getElementById("title").onclick = darkMode;
-
-		document.body.style.background = "#FFFFFF";
-
-		document.getElementById('header').className = "header headerLight";
-		document.getElementById('inputTable').className = "inputTable inputTableLight";
-
-		const inputRowsList = document.getElementsByClassName("inputRow");
-		for (let i = 0; i < inputRowsList.length; i++) {
-  			inputRowsList[i].className = "inputRow inputRowLight";
-		};
-
-		const inputFieldsList = document.getElementsByClassName("input");
-		for (let i = 0; i < inputFieldsList.length; i++) {
-  			inputFieldsList[i].className = "input inputLight";
-		};
-
-		const inputResultsList = document.getElementsByClassName("result");
-		for (let i = 0; i < inputResultsList.length; i++) {
-  			inputResultsList[i].className = "result inputLight";
-		};
-
-		document.getElementById('resetButton').className = "resetButton resetButtonLight";
-
-		document.getElementById("tabbar").className = "tabbar tabbarLight";
-		g_textActive        = "#397DF6";
-		g_textInactive      = "#999999";
-
-		if (g_mode == 100){
-			document.getElementById("mode100icon").style.fill = g_textActive;
-			document.getElementById("mode1icon").style.fill = g_textInactive;
-		}
-		else{
-			document.getElementById("mode100icon").style.fill = g_textInactive;
-			document.getElementById("mode1icon").style.fill = g_textActive;
-		}
-	}
-
-	var g_numberOfInputRows = 6;
+	var g_textActive    = "#397DF6";
+	var g_textInactive  = "#999999";
+	var g_darkMode      = false;
+	var g_numberOfInputRows = 4;
 	var g_mode = 100;
 
 	const elements = ["title", "pr_h", "un_h", "pfun_h", "resetButton", "mode100text", "mode1text"];
-	const text = ["100grams", "Price", "Weight(g.)", "Price for 100g.", "Reset", "100grams", "1piece", "Pieces", "Price for piece"];
-	const ruText = ["100грамм", "Цена", "Вес(г.)", "Цена за 100г.", "Сброс", "100грамм", "1штука", "Штук в уп.", "Цена за штуку"];
-	const uaText = ["100грамів", "Ціна", "Вага(г.)", "Ціна за 100г.", "Скинути", "100грамів", "1штука", "Штук в уп.", "Ціна за штуку"];
-	
+	const text     = ["100grams", "Price", "Weight(g.)", "Price for 100g.", "Reset", "100grams", "1piece", "Pieces", "Price for piece"];
+	const ruText   = ["100грамм", "Цена", "Вес(г.)", "Цена за 100г.", "Сброс", "100грамм", "1штука", "Штук в уп.", "Цена за штуку"];
+	const uaText   = ["100грамів", "Ціна", "Вага(г.)", "Ціна за 100г.", "Скинути", "100грамів", "1штука", "Штук в уп.", "Ціна за штуку"];
+
+	function darkMode(){
+		if (g_darkMode){
+			var mode           = "Dark";
+			var bodyBackground = "#1C1C1E";
+			g_textActive       = "#5A91F7";
+			g_textInactive     = "#757575";
+		}
+		else {
+			var mode           = "Light";
+			var bodyBackground = "#FFFFFF";
+			g_textActive       = "#397DF6";
+			g_textInactive     = "#999999";
+		};
+
+		document.body.style.background = bodyBackground;
+
+		document.getElementById('header').className = "header header" + mode;
+		document.getElementById('inputTable').className = "inputTable inputTable" + mode;
+
+		const inputRowsList = document.getElementsByClassName("inputRow");
+		for (let i = 0; i < inputRowsList.length; i++) {
+  			inputRowsList[i].className = "inputRow inputRow" + mode;
+		};
+
+		const inputFieldsList = document.getElementsByClassName("input");
+		for (let i = 0; i < inputFieldsList.length; i++) {
+  			inputFieldsList[i].className = "input input" + mode;
+		};
+
+		const inputResultsList = document.getElementsByClassName("result");
+		for (let i = 0; i < inputResultsList.length; i++) {
+  			inputResultsList[i].className = "inputRow inputRow" + mode + "result input" + mode;
+		};
+
+		const tableButtonsList = document.getElementsByClassName("resetButton");
+		for (let i = 0; i < tableButtonsList.length; i++) {
+  			tableButtonsList[i].className = "resetButton resetButton" + mode;
+		};
+
+		document.getElementById("tabbar").className = "tabbar tabbar" + mode;
+
+		if (g_mode == 100){
+			document.getElementById("mode100icon").style.fill = g_textActive; //active icon
+			document.getElementById("mode1icon").style.fill = g_textInactive; //inactive icon
+		}
+		else{
+			document.getElementById("mode100icon").style.fill = g_textInactive;
+			document.getElementById("mode1icon").style.fill = g_textActive;
+		};
+	}
+
+	function tableGenerator(){
+		var tableHTML = "<tr>"
+					  + "<th id=\"pr_h\" width=\"33%\">" + text[1] + "</th>" 
+					  + "<th id=\"un_h\" width=\"33%\">" + text[2] + "</th>"
+					  + "<th width=\"1%\"></th>"
+					  + "<th id=\"pfun_h\" width=\"32%\">" + text[3] + "</th>" 
+					  + "</tr>";
+
+		if (g_numberOfInputRows < 1){
+			g_numberOfInputRows = 1;
+		};
+		if (g_numberOfInputRows > 10){
+			g_numberOfInputRows = 10;
+		};
+
+		for (var i = 0; i < g_numberOfInputRows; ++i){
+			var rowHTML = "<tr><td colspan = \"2\"><table class=\"inputRow inputRowLight\"><tr>"
+						+ "<td width=\"32%\"><input class=\"input inputLight\" type=\"text\" inputmode=\"decimal\" id=\"pr_"+ i +"\" value=0 onfocus=\"this.value=''\" onblur=\"numberCheck(this.id)\"></td>"
+						+ "<td width=\"32%\"><input class=\"input inputLight\" type=\"text\" inputmode=\"decimal\" id=\"wt_"+ i +"\" value=0 onfocus=\"this.value=''\" onblur=\"numberCheck(this.id)\"></td>"
+						+ "</tr></table></td>"
+						+ "<td width=\"2%\"></td>"
+						+ "<td width=\"32%\" class=\"inputRow inputRowLight\"><div id=\"pw_"+ i +"\" class=\"input inputLight\">0</div></td></tr>";
+
+			tableHTML += rowHTML;
+		};
+
+		tableHTML += "<tr>"
+				  + "<td colspan = \"4\"><p align=\"center\">"
+				  + "<button type=\"button\" class=\"resetButton resetButtonLight\" id=\"minusButton\" onclick=\"g_numberOfInputRows-=1; tableGenerator(); darkMode();\">-</button>"
+				  + "<button type=\"button\" class=\"resetButton resetButtonLight\" id=\"resetButton\" onclick=\"reset()\">" + text[4] + "</button>"
+				  + "<button type=\"button\" class=\"resetButton resetButtonLight\" id=\"plusButton\" onclick=\"g_numberOfInputRows+=1; tableGenerator(); darkMode();\">+</button>"
+				  + "</td></p>"
+				  + "</tr>";
+
+		document.getElementById("inputTable").innerHTML = tableHTML;
+	}
+
 	function setLocale(){
 		var locale = navigator.language;
 		locale = locale.substring(0,2);
@@ -120,14 +128,20 @@
 		for (var i = 0; i < elements.length; ++i){
 				document.getElementById(elements[i]).innerHTML = text[i];
 		};
+	}
+
+	function onLoad(){
+		tableGenerator();
+		setLocale();
 
 		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			g_darkMode = true;
 			darkMode();
 		};
 	}
 
 	var mode100saveArray = ["0","0","0","0","0","0","0","0","0","0","0","0"];
-	var mode1saveArray = ["0","0","0","0","0","0","0","0","0","0","0","0"];
+	var mode1saveArray   = ["0","0","0","0","0","0","0","0","0","0","0","0"];
 
 	function saveValues(){
 		if(g_mode == 1){
@@ -259,7 +273,7 @@
 	}
 
 	.inputTable{
-		width: 96%;
+		width: 90%;
 
 		font-family: arial;
 		border-spacing: 0px 17px;
@@ -349,6 +363,8 @@
 		padding-left: 20px;
 		padding-right: 20px;
 
+		margin-left: 10px;
+		margin-right: 10px;
 		margin-bottom: 50px;
 
 		font-size: 17px;
@@ -374,92 +390,20 @@
 </head>
 
 <!-- HTML -->
-<body onload="javascript:setLocale()">
+<body onload="javascript:onLoad()">
 
 <!-- Header -->
 <div id="header" class="header headerLight">
-	<div id="title" onclick="darkMode()">100grams</div>
+	<div id="title" onclick="darkMode()" style="margin-left: 3%;">100grams</div>
 </div>
 
 <!-- Table -->
 <p></p>
 	<table class="inputTable inputTableLight" id="inputTable" align="center">
 		<tr>
-			<th id="pr_h" width="33%">Price</th>
-			<th id="un_h" width="33%">Weight (g.)</th>
-			<th id="pfun_h" width="33%">Price for 100 g.</th>
-		</tr>
-		<tr>
-			<td colspan = "3">
-			<table class="inputRow inputRowLight">
-				<tr>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_0" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%" class="result inputLight"><div id="pw_0">0</div></td>
-				</tr>
-			</table>
-			</td>
-		</tr>
-		<tr>
-			<td colspan = "3">
-			<table class="inputRow inputRowLight">
-				<tr>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_1" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%" class="result inputLight"><div id="pw_1">0</div></td>
-				</tr>
-			</table>
-			</td>
-		</tr>
-		<tr>
-			<td colspan = "3">
-			<table class="inputRow inputRowLight">
-				<tr>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_2" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%" class="result inputLight"><div id="pw_2">0</div></td>
-				</tr>
-			</table>
-			</td>
-		</tr>
-		<tr>
-			<td colspan = "3">
-			<table class="inputRow inputRowLight">
-				<tr>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_3" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%" class="result inputLight"><div id="pw_3">0</div></td>
-				</tr>
-			</table>
-			</td>
-		</tr>
-		<tr>
-			<td colspan = "3">
-			<table class="inputRow inputRowLight">
-				<tr>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_4" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%" class="result inputLight"><div id="pw_4">0</div></td>
-				</tr>
-			</table>
-			</td>
-		</tr>
-		<tr>
-			<td colspan = "3">
-			<table class="inputRow inputRowLight">
-				<tr>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="pr_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%"><input class="input inputLight" type="text" inputmode="decimal" id="wt_5" value=0 onfocus="this.value=''" onblur="numberCheck(this.id)"></td>
-				<td width="33%" class="result inputLight"><div id="pw_5">0</div></td>
-				</tr>
-			</table>
-			</td>
+			<th id="pr_h">This website is useless without javascript enabled :(</th>
 		</tr>
 	</table>
-
-	<p align="center">
-	<button type="button" class="resetButton resetButtonLight" id="resetButton" onclick="reset()">Reset</button>
-	</p>
 
 <!-- Tabbar -->
 <div class="tabbar tabbarLight" id="tabbar">
