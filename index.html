@@ -12,11 +12,17 @@
 
 <!-- Javascript -->
 <script type="text/javascript">
-	var g_textActive    = "#397DF6";
-	var g_textInactive  = "#999999";
-	var g_darkMode      = false;
+	var g_textActive        = "#397DF6";
+	var g_textInactive      = "#999999";
+	var g_darkMode          = false;
 	var g_numberOfInputRows = 4;
-	var g_mode = 100;
+	var g_mode              = 100;
+	var g_maxRows           = 10;
+
+	var mode100prSaveArray  = [];
+	var mode100wtSaveArray  = [];
+	var mode1prSaveArray    = [];
+	var mode1pcSaveArray    = [];
 
 	const elements = ["title", "pr_h", "un_h", "pfun_h", "resetButton", "mode100text", "mode1text"];
 	const text     = ["100grams", "Price", "Weight(g.)", "Price for 100g.", "Reset", "100grams", "1piece", "Pieces", "Price for piece"];
@@ -24,6 +30,7 @@
 	const uaText   = ["100грамів", "Ціна", "Вага(г.)", "Ціна за 100г.", "Скинути", "100грамів", "1штука", "Штук в уп.", "Ціна за штуку"];
 
 	function darkMode(){
+
 		if (g_darkMode){
 			var mode           = "Dark";
 			var bodyBackground = "#1C1C1E";
@@ -39,8 +46,8 @@
 
 		document.body.style.background = bodyBackground;
 
-		document.getElementById('header').className = "header header" + mode;
 		document.getElementById('inputTable').className = "inputTable inputTable" + mode;
+		document.getElementById('header').className = "header header" + mode;
 
 		const inputRowsList = document.getElementsByClassName("inputRow");
 		for (let i = 0; i < inputRowsList.length; i++) {
@@ -50,11 +57,6 @@
 		const inputFieldsList = document.getElementsByClassName("input");
 		for (let i = 0; i < inputFieldsList.length; i++) {
   			inputFieldsList[i].className = "input input" + mode;
-		};
-
-		const inputResultsList = document.getElementsByClassName("result");
-		for (let i = 0; i < inputResultsList.length; i++) {
-  			inputResultsList[i].className = "inputRow inputRow" + mode + "result input" + mode;
 		};
 
 		const tableButtonsList = document.getElementsByClassName("resetButton");
@@ -85,8 +87,8 @@
 		if (g_numberOfInputRows < 1){
 			g_numberOfInputRows = 1;
 		};
-		if (g_numberOfInputRows > 10){
-			g_numberOfInputRows = 10;
+		if (g_numberOfInputRows > g_maxRows){
+			g_numberOfInputRows = g_maxRows;
 		};
 
 		for (var i = 0; i < g_numberOfInputRows; ++i){
@@ -140,20 +142,25 @@
 		};
 	}
 
-	var mode100saveArray = ["0","0","0","0","0","0","0","0","0","0","0","0"];
-	var mode1saveArray   = ["0","0","0","0","0","0","0","0","0","0","0","0"];
-
 	function saveValues(){
 		if(g_mode == 1){
+			for (var i = 0; i < g_maxRows; i++) {
+				mode1prSaveArray[i] = "0";
+				mode1pcSaveArray[i] = "0";
+			}
 			for (var i = 0; i < g_numberOfInputRows; ++i) {
-				mode100saveArray[i] = document.getElementById("pr_" + i).value;
-				mode100saveArray[i+6] = document.getElementById("wt_" + i).value;	
+				mode1prSaveArray[i] = document.getElementById("pr_" + i).value;
+				mode1pcSaveArray[i] = document.getElementById("wt_" + i).value;	
 			};
 		};
 		if(g_mode == 100){
+			for (var i = 0; i < g_maxRows; i++) {
+				mode100prSaveArray[i] = "0";
+				mode100wtSaveArray[i] = "0";
+			}
 			for (var i = 0; i < g_numberOfInputRows; ++i) {
-				mode1saveArray[i] = document.getElementById("pr_" + i).value;
-				mode1saveArray[i+6] = document.getElementById("wt_" + i).value;	
+				mode100prSaveArray[i] = document.getElementById("pr_" + i).value;
+				mode100wtSaveArray[i] = document.getElementById("wt_" + i).value;	
 			};
 		};
 	}
@@ -161,15 +168,22 @@
 	function loadValues(){
 		if(g_mode == 1){
 			for (var i = 0; i < g_numberOfInputRows; ++i) {
-				document.getElementById("pr_" + i).value = mode1saveArray[i];
-				document.getElementById("wt_" + i).value = mode1saveArray[i+6];
+				if(mode100prSaveArray[i] == undefined){
+					mode100prSaveArray[i] = "0";
+				};
+				if(mode100wtSaveArray[i] == undefined){
+					mode100wtSaveArray[i] = "0";
+				};
+
+				document.getElementById("pr_" + i).value = mode100prSaveArray[i];
+				document.getElementById("wt_" + i).value = mode100wtSaveArray[i];
 				document.getElementById("pw_" + i).innerHTML = "0";
 			};
 		};
 		if(g_mode == 100){
 			for (var i = 0; i < g_numberOfInputRows; ++i) {
-				document.getElementById("pr_" + i).value = mode100saveArray[i];
-				document.getElementById("wt_" + i).value = mode100saveArray[i+6];
+				document.getElementById("pr_" + i).value = mode1prSaveArray[i];
+				document.getElementById("wt_" + i).value = mode1pcSaveArray[i];
 				document.getElementById("pw_" + i).innerHTML = "0";
 			};
 		};
@@ -255,8 +269,8 @@
 	}
 
 	.header{
-		width: 96%;
-		padding: 2%;
+		width: 98%;
+		padding: 1%;
 		
 		font-family: arial;
 		font-size: 23px;
@@ -320,12 +334,6 @@
 	.inputDark{
 		background-color: #1C1C1E;
 		color: #FFFFFF;
-	}
-
-	.result{
-		border-radius: 10px;
-
-		text-align: center;
 	}
 
 	.tabbar {
@@ -394,7 +402,17 @@
 
 <!-- Header -->
 <div id="header" class="header headerLight">
-	<div id="title" onclick="darkMode()" style="margin-left: 3%;">100grams</div>
+	<table valign="middle" width="100%">
+		<tr>
+			<td width="100%"><div id="title" style="margin-left: 3%;" onclick="g_darkMode == false ? g_darkMode = true : g_darkMode = false; darkMode();">100grams</div></td>
+			<td style="padding-left: 1%; padding-right: 1%;">
+
+			</td>
+			<td style="padding-left: 1%; padding-right: 1%;">
+			
+			</td>
+		</tr>
+	</table>
 </div>
 
 <!-- Table -->
@@ -410,7 +428,7 @@
 		<table class="tabbar_table" align="center">
 			<tr>
 				<td onclick="changeMode(100)" style="width: 50%;">
-					<svg id="mode100icon" width="20" height="20" viewBox="0 0 47 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill: #397DF6;">
+					<svg id="mode100icon" width="20" height="20" viewBox="0 0 47 47" style="fill: #397DF6;">
     					<g>
        				 	<g transform="matrix(-1,0,0,1,47.5913,2)">
             			<path d="M31.01,32.4C29.641,30.977 21.536,37.297 19.617,39.691C17.941,41.784 24.14,45.663 25.33,44.297C27.155,42.199 32.465,33.912 31.01,32.4Z"/>
@@ -428,7 +446,7 @@
 					</svg>
 				</td>
 				<td onclick="changeMode(1)">
-					<svg id="mode1icon" width="20" height="20" viewBox="0 0 47 47" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill: #949494;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+					<svg id="mode1icon" width="20" height="20" viewBox="0 0 47 47" style="fill: #949494;">
     					<g transform="matrix(2.93609,0,0,2.93609,0,1.10468e-30)">
         				<path d="M2.95,0.4C3.139,0.148 3.435,0 3.75,0L12.25,0C12.565,-0 12.861,0.148 13.05,0.4L15.9,4.2C15.965,4.287 16,4.392 16,4.5L16,15C16,15.549 15.549,16 15,16L1,16C0.451,16 0,15.549 0,15L0,4.5C0,4.392 0.035,4.287 0.1,4.2L2.95,0.4ZM7.5,1L3.75,1L1.5,4L7.5,4L7.5,1ZM8.5,1L8.5,4L14.5,4L12.25,1L8.5,1ZM15,5L1,5L1,15L15,15L15,5Z"/>
     					</g>
