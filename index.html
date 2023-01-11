@@ -23,11 +23,13 @@
 	var mode100wtSaveArray  = [];
 	var mode1prSaveArray    = [];
 	var mode1pcSaveArray    = [];
+	var mode3prSaveArray    = [];
+	var mode3dsSaveArray    = [];
 
 	const elements = ["title", "pr_h", "un_h", "pfun_h", "resetButton", "mode100text", "mode1text"];
-	const text     = ["100grams", "Price", "Weight(g.)", "Price for 100g.", "Reset", "100grams", "1piece", "Pieces", "Price for piece"];
-	const ruText   = ["100грамм", "Цена", "Вес(г.)", "Цена за 100г.", "Сброс", "100грамм", "1штука", "Штук в уп.", "Цена за штуку"];
-	const uaText   = ["100грамів", "Ціна", "Вага(г.)", "Ціна за 100г.", "Скинути", "100грамів", "1штука", "Штук в уп.", "Ціна за штуку"];
+	const text     = ["100grams", "Price", "Weight(g.)", "Price for 100g.", "Reset", "100grams", "1piece", "Pieces", "Price for piece","Discount","Discounted price"];
+	const ruText   = ["100грамм", "Цена", "Вес(г.)", "Цена за 100г.", "Сброс", "100грамм", "1штука", "Штук в уп.", "Цена за штуку","Скидка","Цена со скидкой"];
+	const uaText   = ["100грамів", "Ціна", "Вага(г.)", "Ціна за 100г.", "Скинути", "100грамів", "1штука", "Штук в уп.", "Ціна за штуку","Знижка","Ціна зі знижкою"];
 
 	function darkMode(){
 
@@ -143,16 +145,6 @@
 	}
 
 	function saveValues(){
-		if(g_mode == 1){
-			for (var i = 0; i < g_maxRows; i++) {
-				mode1prSaveArray[i] = "0";
-				mode1pcSaveArray[i] = "0";
-			}
-			for (var i = 0; i < g_numberOfInputRows; ++i) {
-				mode1prSaveArray[i] = document.getElementById("pr_" + i).value;
-				mode1pcSaveArray[i] = document.getElementById("wt_" + i).value;	
-			};
-		};
 		if(g_mode == 100){
 			for (var i = 0; i < g_maxRows; i++) {
 				mode100prSaveArray[i] = "0";
@@ -163,10 +155,32 @@
 				mode100wtSaveArray[i] = document.getElementById("wt_" + i).value;	
 			};
 		};
+
+		if(g_mode == 1){
+			for (var i = 0; i < g_maxRows; i++) {
+				mode1prSaveArray[i] = "0";
+				mode1pcSaveArray[i] = "0";
+			}
+			for (var i = 0; i < g_numberOfInputRows; ++i) {
+				mode1prSaveArray[i] = document.getElementById("pr_" + i).value;
+				mode1pcSaveArray[i] = document.getElementById("wt_" + i).value;	
+			};
+		};
+		
+		if(g_mode == 3){
+			for (var i = 0; i < g_maxRows; i++) {
+				mode3prSaveArray[i] = "0";
+				mode3dsSaveArray[i] = "0";
+			}
+			for (var i = 0; i < g_numberOfInputRows; ++i) {
+				mode3prSaveArray[i] = document.getElementById("pr_" + i).value;
+				mode3dsSaveArray[i] = document.getElementById("wt_" + i).value;
+			};
+		};
 	}
 
 	function loadValues(){
-		if(g_mode == 1){
+		if(g_mode == 100){
 			for (var i = 0; i < g_numberOfInputRows; ++i) {
 				if(mode100prSaveArray[i] == undefined){
 					mode100prSaveArray[i] = "0";
@@ -180,10 +194,31 @@
 				document.getElementById("pw_" + i).innerHTML = "0";
 			};
 		};
-		if(g_mode == 100){
+		
+		if(g_mode == 1){
 			for (var i = 0; i < g_numberOfInputRows; ++i) {
+				if(mode1prSaveArray[i] == undefined){
+					mode1prSaveArray[i] = "0";
+				};
+				if(mode1pcSaveArray[i] == undefined){
+					mode1pcSaveArray[i] = "0";
+				};
 				document.getElementById("pr_" + i).value = mode1prSaveArray[i];
 				document.getElementById("wt_" + i).value = mode1pcSaveArray[i];
+				document.getElementById("pw_" + i).innerHTML = "0";
+			};
+		};
+		
+		if(g_mode == 3){
+			for (var i = 0; i < g_numberOfInputRows; ++i) {
+				if(mode3prSaveArray[i] == undefined){
+					mode3prSaveArray[i] = "0";
+				};
+				if(mode3dsSaveArray[i] == undefined){
+					mode3dsSaveArray[i] = "0";
+				};
+				document.getElementById("pr_" + i).value = mode3prSaveArray[i];
+				document.getElementById("wt_" + i).value = mode3dsSaveArray[i];
 				document.getElementById("pw_" + i).innerHTML = "0";
 			};
 		};
@@ -191,6 +226,9 @@
 	}
 
 	function changeMode(setMode){
+
+		saveValues();
+		
 		if (setMode == 100) {
 			g_mode = 100;
 
@@ -198,21 +236,36 @@
 			document.getElementById("pfun_h").innerHTML=text[3];
 			document.getElementById("mode100icon").style.fill = g_textActive;
 			document.getElementById("mode1icon").style.fill = g_textInactive;
+			document.getElementById("mode3icon").style.fill = g_textInactive;
 			document.getElementById("mode100text").style.color = g_textActive;
 			document.getElementById("mode1text").style.color = g_textInactive;
+			document.getElementById("mode3text").style.color = g_textInactive;
 		} 
-		else {
+		else if (setMode == 1) {
 			g_mode = 1;
 
 			document.getElementById("un_h").innerHTML=text[7];
 			document.getElementById("pfun_h").innerHTML=text[8];
 			document.getElementById("mode100icon").style.fill = g_textInactive;
 			document.getElementById("mode1icon").style.fill = g_textActive;
+			document.getElementById("mode3icon").style.fill = g_textInactive;
 			document.getElementById("mode100text").style.color = g_textInactive;
 			document.getElementById("mode1text").style.color = g_textActive;
+			document.getElementById("mode3text").style.color = g_textInactive;
+		}
+		else {
+			g_mode = 3;
+
+			document.getElementById("un_h").innerHTML=text[9];
+			document.getElementById("pfun_h").innerHTML=text[10];
+			document.getElementById("mode100icon").style.fill = g_textInactive;
+			document.getElementById("mode1icon").style.fill = g_textInactive;
+			document.getElementById("mode3icon").style.fill = g_textActive;
+			document.getElementById("mode100text").style.color = g_textInactive;
+			document.getElementById("mode1text").style.color = g_textInactive;
+			document.getElementById("mode3text").style.color = g_textActive;
 		};
 
-		saveValues();
 		loadValues();
 	}
 
@@ -229,9 +282,16 @@
 			};
 
 			if (price != 0 && weight != 0) {
-				var result = (price*g_mode)/weight;
-				result = result.toFixed(2);
-				document.getElementById("pw_" + i).innerHTML=result;
+				if (g_mode != 3){
+					var result = (price*g_mode)/weight;
+					result = result.toFixed(2);
+					document.getElementById("pw_" + i).innerHTML=result;
+				}
+				else {
+					var result = price-((price*weight)/100);
+					result = result.toFixed(2);
+					document.getElementById("pw_" + i).innerHTML=result;
+				};
 			};
 		};
 	}
@@ -427,7 +487,7 @@
 <div class="tabbar tabbarLight" id="tabbar">
 		<table class="tabbar_table" align="center">
 			<tr>
-				<td onclick="changeMode(100)" style="width: 50%;">
+				<td onclick="changeMode(100)" style="width: 33%;">
 					<svg id="mode100icon" width="20" height="20" viewBox="0 0 47 47" style="fill: #397DF6;">
     					<g>
        				 	<g transform="matrix(-1,0,0,1,47.5913,2)">
@@ -452,10 +512,18 @@
     					</g>
 					</svg>
 				</td>
+				<td onclick="changeMode(3)">
+					<svg id="mode3icon" width="20" height="20" viewBox="0 0 16 16" style="fill: #949494;">
+    					<g>
+						<path d="M13.442 2.558a.625.625 0 0 1 0 .884l-10 10a.625.625 0 1 1-.884-.884l10-10a.625.625 0 0 1 .884 0zM4.5 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5zm7 6a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm0 1a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+						</g>
+					</svg>
+				</td>
 			</tr>
 			<tr>
 				<td id="mode100text" style="color: #3478F5;">100grams</td>
 				<td id="mode1text">1piece</td>
+				<td id="mode3text">Discount</td>
 			</tr>
 		</table>
 </div>
