@@ -6,7 +6,8 @@
 	<meta name="theme-color" content="#64C260" media="(prefers-color-scheme: light)">
 	<meta name="theme-color" content="#64C260" media="(prefers-color-scheme: dark)">
 	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<!-- Tag to change status bar icons color -->
+	<!-- <meta name="apple-mobile-web-app-status-bar-style" content="black"> -->
 	<title>100grams</title>
 
 	<!-- Icon for iPhone -->
@@ -401,6 +402,7 @@
 	.tabbar {
 		width:  100%;
 		padding-top: 5px;
+		padding-bottom: env(safe-area-inset-bottom);
 		position: fixed;
 		bottom: 0;
 		
@@ -489,7 +491,7 @@
 <div class="tabbar tabbarLight" id="tabbar">
 		<table class="tabbar_table" align="center">
 			<tr>
-				<td onclick="changeMode(100)" style="width: 33%;">
+				<td onclick="changeMode(100)" style="width: 33,3%;">
 					<svg id="mode100icon" width="20" height="20" viewBox="0 0 47 47" style="fill: #397DF6;">
     					<g>
        				 	<g transform="matrix(-1,0,0,1,47.5913,2)">
